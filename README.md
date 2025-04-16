@@ -19,8 +19,10 @@ The name "Qiskit" is a general term by IBM referring to a collection of software
 | **Quantum Walks** | Quantum analog of classical random walks, used for algorithmic speed-up. | Graph traversal, network analysis, and search algorithms. |
 
 ---
+#### Output Samples
+![IBM Quantum](./_media/_startertools2.png)
 
-![IBM Quantum](./_media/q.png)
+![IBM Quantum](./_media/_startertools3.png)
 
 #### Before you start the installation, you need to have:
 - Python v3.10+ Installed
