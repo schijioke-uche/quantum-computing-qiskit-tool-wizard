@@ -12,6 +12,19 @@ load_dotenv()
 print('')
 
 # Credential map for Open and Premium plans
+# Load from environment (safely)
+is_open = os.getenv("OPEN_PLAN")
+is_premium = os.getenv("PREMIUM_PLAN")
+
+# Determine active plan type
+if is_open == "on":
+    connect = "open"
+elif is_premium == "on":
+    connect = "premium"
+else:
+    raise ValueError("❌ No valid plan is activated. Set OPEN_PLAN or PREMIUM_PLAN to 'on'.")
+
+# Credential map
 credentials = {
     "open": {
         "name": os.getenv("OPEN_PLAN_NAME"),
@@ -27,6 +40,9 @@ credentials = {
     }
 }
 
+# Access the correct credentials
+active_plan = credentials[connect]
+ 
 #------------------------------------------------------------------
 # Quantum Session Account for a given plan type
 def set_plan(plan_type="open"):
@@ -84,11 +100,8 @@ def footer():
     print(f"\nDesign by: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador\nIBM Quantum Qiskit Software - All Rights Reserved ©{today}\n")
 
 #------------------------------------------------
-# Entry Point
 if __name__ == "__main__":
-    # Uncomment one of the two plans below:
-    #---------------------------------------------
-    set_plan("open")       # [For Open Plan]
-    #set_plan("premium")   # [For Premium Plan]
+    set_plan(connect)  # ✅ Pass "open" or "premium" string.
     focus_qpu()
     footer()
+

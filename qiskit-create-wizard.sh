@@ -72,6 +72,18 @@ create_virtual_env() {
     print_success "Virtual environment activated!"
 }
 
+
+quantum_plans() {
+  if [[ -f "ibm-q/q.py" ]]; then
+    echo -e "\033[1;32m🐍 Please wait while we prepare quantum account starter tool module.\033[0m"
+    sleep 5
+    python ibm-q/q.py
+  else
+    echo -e "\033[1;31m❌ File 'ibm-q starter module' does NOT exist.\033[0m"
+    exit 0
+  fi
+}
+
 # 📦 Install Required Qiskit Packages
 package_install() {
     print_step "Upgrading pip, setuptools, and wheel..."
@@ -90,8 +102,8 @@ package_install() {
     pip install python-dotenv
     pip install qiskit-ibm-provider
     print_success "All Qiskit packages installed!"
-    echo -e "\033[1;36m🌌 QUANTUM ACCOUNT BACKEND CONNECTION STATUS\033[0m"
-    python ibm-q/q.py
+    echo -e "\033[1;36m🌌 QUANTUM PLAN ACCOUNT BACKEND CONNECTION\033[0m"
+    quantum_plans
 }
 
 # 🚀 Main..

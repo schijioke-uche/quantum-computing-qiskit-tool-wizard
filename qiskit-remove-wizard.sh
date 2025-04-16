@@ -32,6 +32,8 @@ remove_packages_in_env() {
         qiskit-serverless \
         matplotlib \
         qiskit-ibm-catalog \
+        python-dotenv  \
+        qiskit-ibm-provider \
         --root-user-action=ignore || print_warning "Some Qiskit packages may not be installed."
 
     print_step "Purging pip cache..."

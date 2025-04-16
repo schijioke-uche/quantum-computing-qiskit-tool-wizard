@@ -38,14 +38,14 @@ git clone https://github.com/schijioke-uche/quantum-qiskit-startertool-wizard.gi
 cd quantum-qiskit-startertool-wizard
 ```
 
-##### Step-3: Activate the quantum account enable file
+##### Step-3: Activate the quantum environmental file
 ```sh
-cp quantum-accout.py.tpl quantum-account.py
+cp .env.tpl .env
 ```
 
 ##### Step-4:  Add the required field values then quit screen
 ```sh
-vi quantum-account.py
+vi .env
 ```
 
 ##### Step-5: Run the install wizard
