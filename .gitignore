@@ -1,5 +1,7 @@
 # Ignore Python bytecode files
 
+license-accepted-*
+
 .env
 *.pyc
 __pycache__/
