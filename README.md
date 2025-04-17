@@ -11,7 +11,7 @@ Below is the comparison of the required packages and components used in virtual 
 
 #### ✅ Qiskit 1.x vs Qiskit 2.x Package Comparison
 
-| **Package Category**          | **Qiskit 1.x**                  | **Qiskit 2.x (Production)**             | **Deprecation Notes**                            |
+| **Package Category**          | **Qiskit 1.x**                  | **Qiskit 2.x**             | **Deprecation Notes**                            |
 |------------------------------|----------------------------------|-----------------------------------------|--------------------------------------------------|
 | 🧠 Core SDK                  | `qiskit`                         | `qiskit` v2.0.0                          | ✅ Still active                                  |
 | 🌀 Aer Simulator             | `qiskit-aer`                     | `qiskit-aer` v0.17.0                     | ✅ Still active                                  |
