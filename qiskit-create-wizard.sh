@@ -12,7 +12,7 @@ print_error() {
 }
 
 quantum_terminal() {
-  source qiskit_lic.sh
+  source ~/*/quantum-qiskit-startertool-wizard/qiskit_lic.sh
   echo -e "\033[1;36m🌌 Welcome to the Quantum Terminal Environment Setup Wizard\033[0m"
   echo -e "\033[1;33mPlease select your terminal environment type:\033[0m"
   echo -e "\033[1;32m[0]\033[0m Linux Terminal (default)"
@@ -63,15 +63,19 @@ change_dir() {
 }
 
 quantum_plans() {
-  if [[ -f "ibm-q/q.py" ]]; then
-    echo -e "\033[1;32m🐍 Please wait while we prepare quantum account starter tool module.\033[0m"
-    sleep 5
-    python ibm-q/q.py
+  local file
+  file=$(find ~ -type f -path "*/quantum-qiskit-startertool-wizard/ibm-q/q.py" 2>/dev/null | head -n 1)
+
+  if [[ -n "$file" && -f "$file" ]]; then
+    echo -e "\033[1;32m🐍 Preparing Quantum Account Starter Tool module...\033[0m"
+    sleep 2
+    python "$file"
   else
-    echo -e "\033[1;31m❌ File 'ibm-q starter module' does NOT exist.\033[0m"
-    exit 0
+    echo -e "\033[1;31m❌ 'ibm-q/q.py' starter module not found or inaccessible.\033[0m"
+    return 1
   fi
 }
+
 
 # 📦 Install Required Qiskit Packages
 package_install() {
