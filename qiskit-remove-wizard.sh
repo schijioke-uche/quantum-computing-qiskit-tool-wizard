@@ -18,6 +18,11 @@ delete_virtual_env() {
     fi
 }
 
+# 🐍 Directory For Virtual Environment
+change_dir() {
+  cd ~
+}
+
 # 🐍 Deactivate and Remove Python Virtual Environment...
 remove_packages_in_env() {
     
@@ -40,7 +45,7 @@ remove_packages_in_env() {
     pip cache purge || print_warning "Pip cache purge failed or unsupported."
 
     print_step "Removing '~/qiskit-env' directory..."
-    rm -rf ~/qiskit-env && print_success "'qiskit-env' directory removed."
+    rm -rf ~/qiskit-env && print_success "'qiskit-env' installation removed."
 
     sleep 1
     print_step "📋 Remaining Qiskit-related packages:"
@@ -48,5 +53,6 @@ remove_packages_in_env() {
 }
 
 # 🚀 Execute
+change_dir
 remove_packages_in_env
 delete_virtual_env

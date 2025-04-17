@@ -57,21 +57,10 @@ quantum_terminal() {
   echo -e "\n\033[1;32m🎉 Qiskit environment created!"
 }
 
-
-# 🐍 Create and Activate Python Virtual Environment
-create_virtual_env() {
-    print_step "Creating Python virtual environment 'qiskit-env'..."
-    python3.10 -m venv ~/qiskit-env
-    print_success "Virtual environment created!"
-
-    print_step "Activating virtual environment..."
-    . ~/qiskit-env/bin/activate
-    sleep 5
-    echo "activating virtual environment..."
-    sleep 5
-    print_success "Virtual environment activated!"
+# 🐍 Directory For Virtual Environment
+change_dir() {
+  cd ~
 }
-
 
 quantum_plans() {
   if [[ -f "ibm-q/q.py" ]]; then
@@ -108,7 +97,7 @@ package_install() {
 
 # 🚀 Main..
 main() {
-    #create_virtual_env
+    change_dir
     quantum_terminal
     package_install
     print_success "Qiskit environment and fundamental packages setup complete!"
