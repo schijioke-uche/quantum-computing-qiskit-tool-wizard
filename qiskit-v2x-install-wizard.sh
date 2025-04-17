@@ -101,6 +101,8 @@ package_install() {
     print_success "All Qiskit packages installed!"
     echo -e "\033[1;36m🌌 QUANTUM PLAN ACCOUNT BACKEND CONNECTION\033[0m"
     quantum_plans
+    print_step "Purging pip cache..."
+    pip cache purge || print_warning "Pip cache purge failed."
 }
 
 # 🚀 Main..
