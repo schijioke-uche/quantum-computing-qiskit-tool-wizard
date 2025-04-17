@@ -95,6 +95,7 @@ package_install() {
     pip install python-dotenv
     pip install clean-dotenv
     pip install qiskit-ibm-provider
+    pip install pyscf
     print_success "All Qiskit packages installed!"
     echo -e "\033[1;36m🌌 QUANTUM PLAN ACCOUNT BACKEND CONNECTION\033[0m"
     quantum_plans
