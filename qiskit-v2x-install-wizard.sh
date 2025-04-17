@@ -12,7 +12,9 @@ print_error() {
 }
 
 quantum_terminal() {
-  source ~/*/quantum-qiskit-startertool-wizard/qiskit_lic.sh
+  local lic
+  lic=$(find ~ -type f -path "*/quantum-qiskit-v2x-startertool-wizard/qiskit_lic.sh" 2>/dev/null | head -n 1)
+  source $lic
   echo -e "\033[1;36m🌌 Welcome to the Quantum Terminal Environment Setup Wizard\033[0m"
   echo -e "\033[1;33mPlease select your terminal environment type:\033[0m"
   echo -e "\033[1;32m[0]\033[0m Linux Terminal (default)"
@@ -25,8 +27,8 @@ quantum_terminal() {
   read -p $'\n\033[1;35mEnter option number [0-5]: \033[0m' terminal
 
   # 🌱 Create Python virtual environment
-  echo -e "\n\033[1;36m📦 Creating Python virtual environment in ~/qiskit-env...\033[0m"
-  python -m venv ~/qiskit-env || { echo -e "\033[1;31m❌ Failed to create virtual environment.\033[0m"; return 1; }
+  echo -e "\n\033[1;36m📦 Creating Python virtual environment in ~/qiskit-v2x-env...\033[0m"
+  python -m venv ~/qiskit-v2x-env || { echo -e "\033[1;31m❌ Failed to create virtual environment.\033[0m"; return 1; }
 
   echo -e "\033[1;32m✅ Virtual environment created successfully!\033[0m"
 
@@ -34,11 +36,11 @@ quantum_terminal() {
   case $terminal in
     0|1|2|3)
       echo -e "\033[1;36m⚡ Activating environment for Unix-like system...\033[0m"
-      source ~/qiskit-env/bin/activate
+      source ~/qiskit-v2x-env/bin/activate
       ;;
     4|5)
       echo -e "\033[1;36m⚡ Activating environment for Windows...\033[0m"
-      source ~/qiskit-env/Scripts/activate
+      source ~/qiskit-v2x-env/Scripts/activate
       ;;
     *)
       echo -e "\033[1;31m❌ Invalid selection. Exiting.\033[0m"
@@ -64,7 +66,7 @@ change_dir() {
 
 quantum_plans() {
   local file
-  file=$(find ~ -type f -path "*/quantum-qiskit-startertool-wizard/ibm-q/q.py" 2>/dev/null | head -n 1)
+  file=$(find ~ -type f -path "*/quantum-qiskit-v2x-startertool-wizard/ibm-q/q.py" 2>/dev/null | head -n 1)
 
   if [[ -n "$file" && -f "$file" ]]; then
     echo -e "\033[1;32m🐍 Preparing Quantum Account Starter Tool module...\033[0m"
@@ -82,20 +84,21 @@ package_install() {
     print_step "Upgrading pip, setuptools, and wheel..."
     pip install --upgrade pip setuptools wheel
     print_step "Installing Qiskit packages..."
-    pip install qiskit
-    pip install qiskit-aer
-    pip install qiskit-algorithms
-    pip install qiskit-ibm-runtime
-    pip install qiskit-nature
-    pip install qiskit-nature-pyscf
-    pip install qiskit-serverless
-    pip install matplotlib
-    pip install jupyter
-    pip install qiskit-ibm-catalog
-    pip install python-dotenv
-    pip install clean-dotenv
-    pip install qiskit-ibm-provider
-    pip install pyscf
+    pip install         \
+        qiskit           \
+        qiskit-aer        \
+        qiskit-algorithms  \
+        qiskit-ibm-runtime  \
+        qiskit-nature        \
+        qiskit-nature-pyscf   \
+        qiskit-serverless      \
+        qiskit-ibm-catalog      \
+        qiskit-ibm-provider      \
+        python-dotenv             \
+        clean-dotenv               \
+        matplotlib                  \
+        jupyter                      \
+        pyscf    
     print_success "All Qiskit packages installed!"
     echo -e "\033[1;36m🌌 QUANTUM PLAN ACCOUNT BACKEND CONNECTION\033[0m"
     quantum_plans
@@ -107,14 +110,14 @@ main() {
     quantum_terminal
     package_install
     print_success "Qiskit environment and fundamental packages setup complete!"
-    . ~/qiskit-env/bin/activate
+    . ~/qiskit-v2x-env/bin/activate
     print_step "Installed Qiskit Packages:"
     pip list | grep qiskit
     echo -e "🧪 You can now start developing quantum solutions using Qiskit!\033[0m"
     echo -e "🧪 To start your quantum qiskit environment, run any of these:\033[0m"
-    echo -e "🖥️ For Linux: source ~/qiskit-env/bin/activate\033[0m"
-    echo -e "🖥️ For MacOS: source ~/qiskit-env/bin/activate\033[0m"
-    echo -e "🖥️ For Windows: source ~/qiskit-env/Scripts/activate\033[0m"
+    echo -e "🖥️ For Linux: source ~/qiskit-v2x-env/bin/activate\033[0m"
+    echo -e "🖥️ For MacOS: source ~/qiskit-v2x-env/bin/activate\033[0m"
+    echo -e "🖥️ For Windows: source ~/qiskit-v2x-env/Scripts/activate\033[0m"
     echo -e "🧪 To open your notebook: jupyter notebook <path/to/notebook.ipynb>\033[0m"
 }
 main

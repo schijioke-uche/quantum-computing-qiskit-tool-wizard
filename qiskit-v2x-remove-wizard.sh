@@ -26,26 +26,30 @@ change_dir() {
 # 🐍 Deactivate and Remove Python Virtual Environment...
 remove_packages_in_env() {
     
-    print_step "Uninstalling Qiskit packages..."
-    pip uninstall -y \
-        qiskit \
-        qiskit-aer \
-        qiskit-algorithms \
-        qiskit-ibm-runtime \
-        qiskit-nature \
-        qiskit-nature-pyscf \
-        qiskit-serverless \
-        matplotlib \
-        qiskit-ibm-catalog \
-        python-dotenv  \
-        qiskit-ibm-provider \
+    print_step "Uninstalling Qiskit & related packages..."
+    pip uninstall -y    \
+        qiskit           \
+        qiskit-aer        \
+        qiskit-terra      \
+        qiskit-algorithms  \
+        qiskit-ibm-runtime  \
+        qiskit-nature        \
+        qiskit-nature-pyscf   \
+        qiskit-serverless      \
+        qiskit-ibm-catalog      \
+        qiskit-ibm-provider      \
+        python-dotenv             \
+        clean-dotenv               \
+        matplotlib                  \
+        jupyter                      \
+        pyscf                         \
         --root-user-action=ignore || print_warning "Some Qiskit packages may not be installed."
 
     print_step "Purging pip cache..."
-    pip cache purge || print_warning "Pip cache purge failed or unsupported."
+    pip cache purge || print_warning "Pip cache purge failed."
 
-    print_step "Removing '~/qiskit-env' directory..."
-    rm -rf ~/qiskit-env && print_success "'qiskit-env' installation removed."
+    print_step "Removing '~/qiskit-v2x-env' directory..."
+    rm -rf ~/qiskit-v2x-env && print_success "'qiskit-v2x-env' installation removed."
 
     sleep 1
     print_step "📋 Remaining Qiskit-related packages:"

@@ -52,14 +52,14 @@ vi .env
 
 ##### Step-5: Run the install wizard
 ```sh
-./qiskit-create-wizard.sh
+./qiskit-v2x-install-wizard.sh
 ```
 
 ----------------------------------------------
 
 ######  Removal of Installation
 ```sh
-./qiskit-remove-wizard.sh
+./qiskit-v2x-remove-wizard.sh
 ```
 
 ----------------------------------------------
