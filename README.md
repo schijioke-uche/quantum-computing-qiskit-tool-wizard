@@ -3,6 +3,48 @@
 ----------------------------------------------
 The name "Qiskit" is a general term by IBM referring to a collection of software for executing programs on quantum computers. Most notably among these software tools is the open-source Qiskit SDK, and the runtime environment (accessed using Qiskit Runtime) through which you can execute workloads on IBM® quantum hardware. This installation wizard will allow you to install Qiskit software on your machine for IBM quantum development on real quantum QPU operator with realtime runtime. The installation is easy - It will prompt you to accept the license first and then it will automate the installation of qiskit tool for you.
 
+# Qiskit 1.x vs 2.x Production Environment Comparison
+
+Below is the comparison of the required packages and components used in virtual environment for Qiskit 1.x versus Qiskit 2.x, along with deprecation notes and migration guidance.
+
+---
+
+## ✅ Qiskit 1.x vs Qiskit 2.x Package Comparison
+
+| **Package Category**          | **Qiskit 1.x**                  | **Qiskit 2.x (Production)**             | **Deprecation Notes**                            |
+|------------------------------|----------------------------------|-----------------------------------------|--------------------------------------------------|
+| 🧠 Core SDK                  | `qiskit`                         | `qiskit` v2.0.0                          | ✅ Still active                                  |
+| 🌀 Aer Simulator             | `qiskit-aer`                     | `qiskit-aer` v0.17.0                     | ✅ Still active                                  |
+| ⚛️ Algorithms               | `qiskit-aqua`                    | `qiskit-algorithms` v0.3.1              | ⚠️ `qiskit-aqua` deprecated (migrated to `algorithms`) |
+| 🌱 Chemistry                | `qiskit-chemistry`               | `qiskit-nature` v0.7.2                  | ⚠️ `chemistry` fully deprecated → use `nature`   |
+| 🌿 Nature + PySCF           | Not separate                     | `qiskit-nature-pyscf` v0.4.0            | ✅ Production PySCF interface                    |
+| ☁️ IBM Provider             | `qiskit-ibmq-provider`           | `qiskit-ibm-provider` v0.11.0           | ✅ Rebranded + updated                           |
+| 🚀 Runtime                  | Not available                    | `qiskit-ibm-runtime` v0.38.0            | ✅ New in 2.x                                    |
+| 🧪 Function Catalog         | Not available                    | `qiskit-ibm-catalog` v0.0.0             | ✅ New in 2.x                                    |
+| 🔗 Serverless               | Not available                    | `qiskit-serverless` v0.14.2             | ✅ Cloud-native extension                        |
+| 🧪 QuantumInstance          | `qiskit.utils.QuantumInstance`   | ❌ Removed                               | ❌ Deprecated in 2.x — use sessions + primitives |
+| 🧪 BaseSampler              | `qiskit.primitives.BaseSampler`  | ❌ Removed                               | ❌ Removed — replaced by `SamplerV2` / `EstimatorV2` |
+| 🔐 Env + Config             | Manual `os.environ` usage        | `python-dotenv`, `clean-dotenv`         | ✅ Recommended add-ons                           |
+| 📊 Plotting/Display         | `matplotlib`                     | `matplotlib`, `jupyter`                 | ✅ Common requirement                            |
+| ⚛️ Backend Discovery        | `qiskit.IBMQ.get_backend()`      | `QiskitRuntimeService().backend(...)`   | ❌ Old methods deprecated in favor of `RuntimeService` |
+
+---
+
+## 🧪 Summary of Key Deprecations in Qiskit 2.x
+
+| Deprecated Component     | Replaced By                              |
+|--------------------------|------------------------------------------|
+| `qiskit-aqua`            | `qiskit-algorithms`                      |
+| `qiskit-chemistry`       | `qiskit-nature`                          |
+| `QuantumInstance`        | `Session(...)`, `EstimatorV2`, `SamplerV2` |
+| `BaseSampler`, `Sampler` | `SamplerV2`, `EstimatorV2`               |
+| Legacy IBMQ Backends     | `QiskitRuntimeService().backend(...)`    |
+
+---
+
+> ✅ Maintained by: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador
+
+
 ### ⚛️ After Qiskit installation, you can build the following Quantum various use cases
 
 | Quantum Algorithm | Description |   Use Case   |
