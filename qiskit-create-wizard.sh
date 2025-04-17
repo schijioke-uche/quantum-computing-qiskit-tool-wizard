@@ -93,6 +93,7 @@ package_install() {
     pip install jupyter
     pip install qiskit-ibm-catalog
     pip install python-dotenv
+    pip install clean-dotenv
     pip install qiskit-ibm-provider
     print_success "All Qiskit packages installed!"
     echo -e "\033[1;36m🌌 QUANTUM PLAN ACCOUNT BACKEND CONNECTION\033[0m"
