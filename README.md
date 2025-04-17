@@ -3,7 +3,7 @@
 ----------------------------------------------
 The name "Qiskit" is a general term by IBM referring to a collection of software for executing programs on quantum computers. Most notably among these software tools is the open-source Qiskit SDK, and the runtime environment (accessed using Qiskit Runtime) through which you can execute workloads on IBM® quantum hardware. This installation wizard will allow you to install Qiskit software on your machine for IBM quantum development on real quantum QPU operator with realtime runtime. The installation is easy - It will prompt you to accept the license first and then it will automate the installation of qiskit tool for you.
 
-#### Qiskit 1.x vs 2.x Production Environment Comparison (As of April 17, 2025)
+#### Qiskit 1.x vs 2.x Comparison (As of April 17, 2025)
 
 Below is the comparison of the required packages and components used in virtual environment for Qiskit 1.x versus Qiskit 2.x, along with deprecation notes and migration guidance.
 
