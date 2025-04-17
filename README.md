@@ -70,7 +70,7 @@ Below is the comparison of the required packages and components used in virtual 
 - Python v3.10+ Installed
 - Operating system with 64bit (32bit OS is not supported by Qiskit)
 
-#### STEPS
+#### Steps to Install Qiskit v2.x Virtual Development Environment
 
 ##### Step-1
 ```sh
@@ -79,7 +79,7 @@ git clone https://github.com/schijioke-uche/quantum-qiskit-startertool-wizard.gi
 
 ##### Step-2: Change directory
 ```sh
-cd quantum-qiskit-startertool-wizard
+cd quantum-qiskit-v2x-startertool-wizard
 ```
 
 ##### Step-3: Activate the quantum environmental file
