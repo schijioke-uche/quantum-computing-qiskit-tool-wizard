@@ -13,15 +13,15 @@ Below is the comparison of the required packages and components used in virtual 
 
 | **Package Category**          | **Qiskit 1.x**                  | **Qiskit 2.x**             | **Deprecation Notes**                            |
 |------------------------------|----------------------------------|-----------------------------------------|--------------------------------------------------|
-| 🧠 Core SDK                  | `qiskit`                         | `qiskit` v2.0.0                          | ✅ Still active                                  |
-| 🌀 Aer Simulator             | `qiskit-aer`                     | `qiskit-aer` v0.17.0                     | ✅ Still active                                  |
-| ⚛️ Algorithms               | `qiskit-aqua`                    | `qiskit-algorithms` v0.3.1              | ⚠️ `qiskit-aqua` deprecated (migrated to `algorithms`) |
-| 🌱 Chemistry                | `qiskit-chemistry`               | `qiskit-nature` v0.7.2                  | ⚠️ `chemistry` fully deprecated → use `nature`   |
-| 🌿 Nature + PySCF           | Not separate                     | `qiskit-nature-pyscf` v0.4.0            | ✅ Production PySCF interface                    |
-| ☁️ IBM Provider             | `qiskit-ibmq-provider`           | `qiskit-ibm-provider` v0.11.0           | ✅ Rebranded + updated                           |
-| 🚀 Runtime                  | Not available                    | `qiskit-ibm-runtime` v0.38.0            | ✅ New in 2.x                                    |
-| 🧪 Function Catalog         | Not available                    | `qiskit-ibm-catalog` v0.0.0             | ✅ New in 2.x                                    |
-| 🔗 Serverless               | Not available                    | `qiskit-serverless` v0.14.2             | ✅ Cloud-native extension                        |
+| 🧠 Core SDK                  | `qiskit`                         | `qiskit`                          | ✅ Still active                                  |
+| 🌀 Aer Simulator             | `qiskit-aer`                     | `qiskit-aer`                    | ✅ Still active                                  |
+| ⚛️ Algorithms               | `qiskit-aqua`                    | `qiskit-algorithms`              | ⚠️ `qiskit-aqua` deprecated (migrated to `algorithms`) |
+| 🌱 Chemistry                | `qiskit-chemistry`               | `qiskit-nature`                 | ⚠️ `chemistry` fully deprecated → use `nature`   |
+| 🌿 Nature + PySCF           | Not separate                     | `qiskit-nature-pyscf`            | ✅ Production PySCF interface                    |
+| ☁️ IBM Provider             | `qiskit-ibmq-provider`           | `qiskit-ibm-provider`          | ✅ Rebranded + updated                           |
+| 🚀 Runtime                  | Not available                    | `qiskit-ibm-runtime`            | ✅ New in 2.x                                    |
+| 🧪 Function Catalog         | Not available                    | `qiskit-ibm-catalog`              | ✅ New in 2.x                                    |
+| 🔗 Serverless               | Not available                    | `qiskit-serverless`              | ✅ Cloud-native extension                        |
 | 🧪 QuantumInstance          | `qiskit.utils.QuantumInstance`   | ❌ Removed                               | ❌ Deprecated in 2.x — use sessions + primitives |
 | 🧪 BaseSampler              | `qiskit.primitives.BaseSampler`  | ❌ Removed                               | ❌ Removed — replaced by `SamplerV2` / `EstimatorV2` |
 | 🔐 Env + Config             | Manual `os.environ` usage        | `python-dotenv`, `clean-dotenv`         | ✅ Recommended add-ons                           |
