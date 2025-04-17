@@ -37,7 +37,6 @@ remove_packages_in_env() {
         qiskit-nature-pyscf   \
         qiskit-serverless      \
         qiskit-ibm-catalog      \
-        qiskit-ibm-provider      \
         python-dotenv             \
         clean-dotenv               \
         matplotlib                  \

@@ -93,7 +93,6 @@ package_install() {
         qiskit-nature-pyscf   \
         qiskit-serverless      \
         qiskit-ibm-catalog      \
-        qiskit-ibm-provider      \
         python-dotenv             \
         clean-dotenv               \
         matplotlib                  \
