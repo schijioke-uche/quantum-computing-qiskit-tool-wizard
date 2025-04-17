@@ -9,13 +9,17 @@
 # Default (Open plan) - free
 OPEN_PLAN_CHANNEL="<PROVIDE CHANNEL NAME>"
 OPEN_PLAN_INSTANCE="<PROVIDE INSTANCE AS CRN STRING>"
-OPEN_PLAN_IQP_API_TOKEN="<PROVIDE IQP API TOKEN>"
 OPEN_PLAN_NAME="<PROVIDE PLAN NAME>"
+
+
+# GENERAL PURPOSE
+#--------------------------------------------
+IQP_API_TOKEN="PROVIDE IQP API TOKEN"  
+
 
 # Optional (Upgrade) - Premium
 PREMIUM_PLAN_CHANNEL="<PROVIDE CHANNEL NAME>"
 PREMIUM_PLAN_INSTANCE="<PROVIDE INSTANCE AS HUB/PROJECT/ASSET PATH>"
-PREMIUM_IQP_API_TOKEN="<PROVIDE IQP API TOKEN>"
 PREMIUM_PLAN_NAME="<PROVIDE PLAN NAME>"
 PREMIUM_IQP_API_URL="https://auth.quantum-computing.ibm.com/api/users/loginWithToken"  # Update this URL if needed
 PREMIUM_IQP_BACKEND_URL="https://api.quantum-computing.ibm.com/runtime/backends"  # Update this URL if needed

@@ -33,13 +33,13 @@ credentials = {
         "name": os.getenv("OPEN_PLAN_NAME"),
         "channel": os.getenv("OPEN_PLAN_CHANNEL"),
         "instance": os.getenv("OPEN_PLAN_INSTANCE"),
-        "token": os.getenv("OPEN_IQP_API_TOKEN")
+        "token": os.getenv("IQP_API_TOKEN")
     },
     "premium": {
         "name": os.getenv("PREMIUM_PLAN_NAME"),
         "channel": os.getenv("PREMIUM_PLAN_CHANNEL"),
         "instance": os.getenv("PREMIUM_PLAN_INSTANCE"),
-        "token": os.getenv("PREMIUM_IQP_API_TOKEN")
+        "token": os.getenv("IQP_API_TOKEN")
     }
 }
 active_plan = credentials[connect]
@@ -70,14 +70,14 @@ def set_plan(plan_type=connect):
 def premium_connect():
     """
     Authenticate to IBM Quantum Premium Plan and list available backend devices.
-    Requires 'PREMIUM_IQP_API_TOKEN', 'PREMIUM_IQP_API_URL', and 'PREMIUM_IQP_BACKEND_URL' to be set.
+    Requires 'IQP_API_TOKEN', 'PREMIUM_IQP_API_URL', and 'PREMIUM_IQP_BACKEND_URL' to be set.
     """
     try:
-        token = os.environ.get("PREMIUM_IQP_API_TOKEN", "").strip()
+        token = os.environ.get("IQP_API_TOKEN", "").strip()
         url = os.environ.get("PREMIUM_IQP_API_URL", "").strip()
 
         if not token or not url:
-            print("❌ Required environment variables 'PREMIUM_IQP_API_TOKEN' or 'PREMIUM_IQP_API_URL' are missing or empty.")
+            print("❌ Required environment variables 'IQP_API_TOKEN' or 'PREMIUM_IQP_API_URL' are missing or empty.")
             return
 
         payload = {"apiToken": token}

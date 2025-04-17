@@ -1,5 +1,6 @@
 # Ignore Python bytecode files
 
+test.py
 license-accepted-*
 
 .env
