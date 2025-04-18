@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+#-------------------------------------------
+# @Author: Dr. Jeffrey Chijioke-Uche, IBM
+# @Sofware: Qiskit v2.x Starter Tool Wizard
+#-------------------------------------------
+
 set -e # 🎨 Helper
 print_step() {
     echo -e "\n\033[1;36m🔹 $1\033[0m"
