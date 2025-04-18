@@ -11,6 +11,9 @@ print_error() {
     echo -e "\033[1;31m❌ $1\033[0m"
 }
 
+# 🐍 Binder
+bnd="-------------------------------------------------------"
+
 quantum_terminal() {
   local lic
   lic=$(find ~ -type f -path "*/quantum-qiskit-v2x-startertool-wizard/qiskit_lic.sh" 2>/dev/null | head -n 1)
@@ -103,8 +106,12 @@ package_install() {
         matplotlib                  \
         jupyter                      \
         pyscf    
+    echo "" 
+    echo -e "\033[1;33m$bnd\033[0m"
     python -m pip freeze
-    print_success "All Qiskit packages installed!"
+    echo -e "\033[1;33m$bnd\033[0m"  
+    echo "" 
+    print_success "All Qiskit v2.x packages installed!"
     echo -e "\033[1;36m🌌 QUANTUM PLAN ACCOUNT BACKEND CONNECTION\033[0m"
     quantum_plans
     print_step "Purging pip cache..."
