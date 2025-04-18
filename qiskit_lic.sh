@@ -47,7 +47,7 @@ license_accept() {
         echo "STATUS: ACCEPTED"
         echo "DATE ACCEPTED: $(date +"%m/%d/%Y %H:%M:%S")"
         echo "HOST IP ADDRESS: $user_ip"
-        echo "UNIQUE HASH: $license_hash"
+        echo "UNIQUE HASH/E-SIGNATURE: $license_hash"
         echo "$LIC"
         cat "$LICENSE_FILE"
       } > "$accepted_file"
