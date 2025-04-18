@@ -31,7 +31,9 @@ delete_virtual_env() {
 
 # 🐍 Directory For Virtual Environment
 change_dir() {
-  cd ~
+  cd ~ && print_success "Changed directory successfully to project home.."
+  sleep 5
+  print_step "Preparing for Qiskit v2.x startertool wizard uninstall..."
 }
 
 # 🐍 Deactivate and Remove Python Virtual Environment...

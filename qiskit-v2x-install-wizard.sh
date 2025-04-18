@@ -59,11 +59,16 @@ quantum_terminal() {
   echo -e "\n\033[1;32m🎉 Qiskit environment created!"
 }
 
+
 # 🐍 Directory For Virtual Environment
 change_dir() {
-  cd ~
+  cd ~ && print_success "Changed directory successfully to project home.."
+  sleep 5
+  print_step "Preparing for Qiskit v2.x startertool wizard installation..."
 }
 
+
+# Quantum Account Interactive Setup:
 quantum_plans() {
   local file
   file=$(find ~ -type f -path "*/quantum-qiskit-v2x-startertool-wizard/ibm-q/q.py" 2>/dev/null | head -n 1)
@@ -79,11 +84,11 @@ quantum_plans() {
 }
 
 
-# 📦 Install Required Qiskit Packages
+# 📦 Install Required Qiskit 1v1.x & its Ecosystem
 package_install() {
     print_step "Upgrading pip, setuptools, and wheel..."
     pip install --upgrade pip setuptools wheel
-    print_step "Installing Qiskit packages..."
+    print_step "Installing Qiskit v2.x & its ecosystem..."
     pip install         \
         qiskit           \
         qiskit-aer        \
@@ -98,6 +103,7 @@ package_install() {
         matplotlib                  \
         jupyter                      \
         pyscf    
+    python -m pip freeze
     print_success "All Qiskit packages installed!"
     echo -e "\033[1;36m🌌 QUANTUM PLAN ACCOUNT BACKEND CONNECTION\033[0m"
     quantum_plans
@@ -115,11 +121,11 @@ main() {
     print_step "Installed Qiskit Packages:"
     pip list | grep qiskit
     echo -e "🧪 You can now start developing quantum solutions using Qiskit!\033[0m"
-    echo -e "🧪 To start your quantum qiskit environment, run any of these:\033[0m"
-    echo -e "🖥️ For Linux: source ~/qiskit-v2x-env/bin/activate\033[0m"
-    echo -e "🖥️ For MacOS: source ~/qiskit-v2x-env/bin/activate\033[0m"
-    echo -e "🖥️ For Windows: source ~/qiskit-v2x-env/Scripts/activate\033[0m"
-    echo -e "🧪 To open your notebook: jupyter notebook <path/to/notebook.ipynb>\033[0m"
+    echo -e "🔹 To start your quantum qiskit environment, run any of these:\033[0m"
+    echo -e "\n\033[1;36m🧪 You can now start developing quantum solutions using Qiskit!:\033[0m"
+    echo -e "🖥️ Linux/macOS: \033[1;32msource ~/qiskit-v1x-env/bin/activate\033[0m"
+    echo -e "🖥️ Windows:     \033[1;32msource ~/qiskit-v1x-env/Scripts/activate\033[0m"
+    echo -e "\n🚀 Launch Jupyter via: \033[1;35mjupyter notebook\033[0m"
     deactivate
 }
 main
