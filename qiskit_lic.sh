@@ -35,10 +35,19 @@ license_accept() {
       echo "✅ License accepted. Proceeding with Qiskit software installation..."
       accepted_date=$(date +"%m-%d-%Y")
       mkdir -p "$STORE_DIR"
+
+      # Get IP address (IPv4 only, avoids loopback)
+      user_ip=$(hostname -I | awk '{print $1}')
+      timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+      license_hash=$(echo -n "$user_ip-$timestamp" | sha256sum | awk '{print $1}')
+
       accepted_file="$STORE_DIR/license-accepted-$accepted_date"
+
       {
         echo "STATUS: ACCEPTED"
-        echo "DATE ACCEPTED: $(date +"%m/%d/%Y")"
+        echo "DATE ACCEPTED: $(date +"%m/%d/%Y %H:%M:%S")"
+        echo "HOST IP ADDRESS: $user_ip"
+        echo "UNIQUE HASH: $license_hash"
         echo "$LIC"
         cat "$LICENSE_FILE"
       } > "$accepted_file"
