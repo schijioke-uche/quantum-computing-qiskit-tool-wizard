@@ -120,5 +120,6 @@ main() {
     echo -e "🖥️ For MacOS: source ~/qiskit-v2x-env/bin/activate\033[0m"
     echo -e "🖥️ For Windows: source ~/qiskit-v2x-env/Scripts/activate\033[0m"
     echo -e "🧪 To open your notebook: jupyter notebook <path/to/notebook.ipynb>\033[0m"
+    deactivate
 }
 main

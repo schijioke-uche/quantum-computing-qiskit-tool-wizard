@@ -1,4 +1,6 @@
-# Author: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassado
+# Author: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador
+# @Software: Qiskit 2.x Starter Tool Wizard
+
 import os
 import requests
 import warnings
