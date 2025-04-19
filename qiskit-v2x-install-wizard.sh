@@ -101,7 +101,8 @@ package_install() {
         qiskit           \
         qiskit-aer        \
         qiskit-algorithms  \
-        qiskit-ibm-runtime  \
+        qiskit-optimization \
+        qiskit-ibm-runtime   \
         qiskit-nature        \
         qiskit-nature-pyscf   \
         qiskit-serverless      \
