@@ -17,9 +17,11 @@ OPEN_PLAN_INSTANCE="<PROVIDE INSTANCE AS CRN STRING>" # Must be a CRN string.
 OPEN_PLAN_NAME="<PROVIDE PLAN NAME>"
 
 
+
 # GENERAL PURPOSE
 #--------------------------------------------
-IQP_API_TOKEN="<PROVIDE IQP API TOKEN>"  
+IQP_API_TOKEN="<PROVIDE IQP API TOKEN or IBM QUANTUM API KEY>"  
+
 
 
 # Optional (Upgrade) - Premium
@@ -31,7 +33,7 @@ PREMIUM_IQP_BACKEND_URL="https://api.quantum-computing.ibm.com/runtime/backends"
 
 
 
-# Uncomment to turn-on one plan: Use one or the other at a time. You can upgrade to the premium plan later.
-#----------------------------------------------------------------------------------------------------------
-OPEN_PLAN = "on"        # [Default] This plan is free - Signup :  https://quantum.cloud.ibm.com 
-#PREMIUM_PLAN = "on"    # [Upgrade] This plan is paid.   https://quantum.cloud.ibm.com
+# Switch "on" one plan: Use one or the other at a time. You cannot switch both on at the same time.
+#--------------------------------------------------------------------------------------------------
+OPEN_PLAN = "on"       # [Default & switched on] This plan is free - Signup :  https://quantum.cloud.ibm.com 
+PREMIUM_PLAN = "off"   # This plan is paid. Switched "Off" by default - Turn it "on" after purchase.  https://quantum.cloud.ibm.com
