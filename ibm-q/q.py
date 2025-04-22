@@ -12,25 +12,41 @@ from dotenv import load_dotenv
 load_dotenv()
 print('')
 
-#--------------------------
-# Credential map 
-# Load from environment (safely)
-is_open = os.getenv("OPEN_PLAN")
-is_premium = os.getenv("PREMIUM_PLAN")
 
+#------------------------------------------------------------------
+# Load from environment (safely): Off by default.
+#------------------------------------------------------------------
+is_open = os.getenv("OPEN_PLAN", "off")
+is_premium = os.getenv("PREMIUM_PLAN", "off")
+is_standard = os.getenv("STANDARD_PLAN", "off")
+is_dedicated = os.getenv("DEDICATED_PLAN", "off")
+
+
+#------------------------------------------------------------------
 # Determine active plan type
+#------------------------------------------------------------------
 bnd = '\n------------------------------------------------------------------------------------------------------------------'
+
 if is_open == "on":
-    connect = "open"
+    connect = os.getenv("OPEN_PLAN_NAME")
     tag = "Open Plan"
 elif is_premium == "on":
-    connect = "premium"
+    connect = os.getenv("PREMIUM_PLAN_NAME")
     tag = "Premium Plan"
+elif is_standard == "on":
+    connect = os.getenv("STANDARD_PLAN_NAME")
+    tag = "Standard Plan"
+elif is_dedicated == "on":
+    connect = os.getenv("DEDICATED_PLAN_NAME")
+    tag = "Dedicated Plan"
 else:
-    raise ValueError("❌ No valid plan is activated. Set OPEN_PLAN or PREMIUM_PLAN to 'on'.")
+    raise ValueError(f"⛔ No valid plan is activated. Set OPEN_PLAN or PREMIUM_PLAN to 'on'.")
 
-# Credential map
-credentials = {
+
+#------------------------------------------------------------------
+# Quantum Plan mapping:
+#------------------------------------------------------------------
+criteria_to_use = {
     "open": {
         "name": os.getenv("OPEN_PLAN_NAME"),
         "channel": os.getenv("OPEN_PLAN_CHANNEL"),
@@ -42,34 +58,81 @@ credentials = {
         "channel": os.getenv("PREMIUM_PLAN_CHANNEL"),
         "instance": os.getenv("PREMIUM_PLAN_INSTANCE"),
         "token": os.getenv("IQP_API_TOKEN")
+    },
+    "standard": {
+        "name": os.getenv("STANDARD_PLAN_NAME"),
+        "channel": os.getenv("STANDARD_PLAN_CHANNEL"),
+        "instance": os.getenv("STANDARD_PLAN_INSTANCE"),
+        "token": os.getenv("IQP_API_TOKEN")
+    },
+    "dedicated": {
+        "name": os.getenv("DEDICATED_PLAN_NAME"),
+        "channel": os.getenv("DEDICATED_PLAN_CHANNEL"),
+        "instance": os.getenv("DEDICATED_PLAN_INSTANCE"),
+        "token": os.getenv("IQP_API_TOKEN")
     }
 }
-active_plan = credentials[connect]
+is_open_on    = is_open
+is_premium_on = is_premium
+is_standard_on = is_standard
+is_dedicated_on = is_dedicated
+active_plan = criteria_to_use[connect]
  
+
 #------------------------------------------------------------------
-# Quantum Session Account for a given plan type
-def set_plan(plan_type=connect):
+# Quantum Connection Save For Reuse:
+#------------------------------------------------------------------
+def qiskit_save_connection(plan_type_on=connect):
     try:
-        cred = credentials[plan_type]
+        criterion = criteria_to_use[plan_type_on]
         QiskitRuntimeService.save_account(
-            channel=cred["channel"],
-            token=cred["token"],
-            instance=cred["instance"],
-            name=cred["name"],
+            channel=criterion["channel"],
+            token=criterion["token"],
+            instance=criterion["instance"],
+            name=criterion["name"],
             set_as_default=True,
             overwrite=True,
             verify=True
         )
-        print(f'{bnd}')
-        print(f'✅ {tag} IBM Quantum Account Plan Backend Connection Established Successfully!')
-        print(f"✅ Plan Type: {plan_type} plan")
-    except Exception as e:
-        print(f"ℹ️ Provider message for token api-login & compute resources view: {e}")
+        # -- Plan Instance ---
+        open_focused_instance = os.getenv("OPEN_PLAN_INSTANCE", "")
+        standard_focused_instance = os.getenv("STANDARD_PLAN_INSTANCE", "")
+        premium_focused_instance = os.getenv("PREMIUM_PLAN_INSTANCE", "")
+        dedicated_focused_instance = os.getenv("DEDICATED_PLAN_INSTANCE", "")
 
-#------------------------------------------------
-# Authenticate into Premium Plan Account
-#------------------------------------------------
-def premium_connect():
+        if plan_type_on == "open":
+            plan_instance = open_focused_instance
+        elif plan_type_on == "standard":
+            plan_instance = standard_focused_instance
+        elif plan_type_on == "premium":
+            plan_instance = premium_focused_instance
+        elif plan_type_on == "dedicated":
+            plan_instance = dedicated_focused_instance
+        else:
+            print("No Plan Specified")
+
+        print(f'{bnd}')
+        print("\nQuantum Processing Units (QPUs) Connection Status - Qiskit v2.x")
+        print(f'{bnd}')
+        # effective Juy 1 2025, removed the warning filter & use ibm_cloud as channel for Premium Plan.
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=DeprecationWarning)
+            confirmation = QiskitRuntimeService()
+        if confirmation: # Verify
+            print(f"⚛️ Your Quantum Plan Type:  ✅ {plan_type_on.capitalize()} Plan")
+            print(f"⚛️ {tag} Connection Status: ✅ QPU backend connection established successfully!")
+            print(f"⚛️ {plan_type_on.capitalize()} Plan Instance: ✅ {plan_instance}\n\n")
+        else:
+            print(f'⛔ {tag} IBM Quantum Account Plan Backend Connection & Save Failed!')
+    except Exception as e:
+        print(f"ℹ️ Provider's message: {e}")
+
+
+
+#-----------------------------------------------------------------------------------------
+# Authenticate into Paid Plan Account via API
+#-----------------------------------------------------------------------------------------
+def paid_plans():
     """
     Authenticate to IBM Quantum Premium Plan and list available backend devices.
     Requires 'IQP_API_TOKEN', 'PREMIUM_IQP_API_URL', and 'PREMIUM_IQP_BACKEND_URL' to be set.
@@ -79,7 +142,7 @@ def premium_connect():
         url = os.environ.get("PREMIUM_IQP_API_URL", "").strip()
 
         if not token or not url:
-            print("❌ Required environment variables 'IQP_API_TOKEN' or 'PREMIUM_IQP_API_URL' are missing or empty.")
+            print(f"⛔ Required environment variables 'IQP_API_TOKEN' or 'PREMIUM_IQP_API_URL' are missing or empty.")
             return
 
         payload = {"apiToken": token}
@@ -93,6 +156,7 @@ def premium_connect():
 
         if auth_id:
             print(f'{bnd}')
+            print(f"⚛️ Your Quantum Plan Type: {tag}")
             print(f'✅ {tag} Plan IBM Quantum Account Plan Backend Connection Established Successfully!')
             print(f"✅ Authentication Successful & Premium Connection ID: {auth_id}")
         else:
@@ -100,13 +164,13 @@ def premium_connect():
             return
 
     except requests.exceptions.RequestException as e:
-        print(f"❌ Network or HTTP error occurred during authentication: {e}")
+        print(f"⛔ Network or HTTP error occurred during authentication: {e}")
         return
     except ValueError:
-        print("❌ Failed to parse authentication JSON response.")
+        print("⛔ Failed to parse authentication JSON response.")
         return
     except Exception as e:
-        print(f"❌ Unexpected authentication error: {e}")
+        print(f"⛔ Unexpected authentication error: {e}")
         return
 
     # Fetch premium backend computing resources
@@ -129,7 +193,7 @@ def premium_connect():
             devices = devices[:5]
             preferred_qpu = "ibm_brisbane" if "ibm_brisbane" in devices else None
 
-            print("🔧 Your Top 5 available premium plan account backend devices:")
+            print("🔧 Your Top 5 available premium plan IBMBackend QPUs:")
             for device in devices:
                 print(f"- {device}")
 
@@ -141,17 +205,20 @@ def premium_connect():
             print("⚠️ No backend devices returned in response.")
 
     except requests.exceptions.RequestException as e:
-        print(f"❌ Error retrieving backend devices: {e}")
+        print(f"⛔ Error retrieving backend devices: {e}")
     except ValueError:
-        print("❌ Failed to parse backend devices JSON response.")
+        print("⛔ Failed to parse backend devices JSON response.")
     except Exception as e:
-        print(f"❌ Unexpected error while fetching backend list: {e}")
+        print(f"⛔ Unexpected error while fetching backend list: {e}")
 
 
-#------------------------------------------------------------------
-# General focus backend QPUs Information
-#------------------------------------------------------------------
-def focus_qpu():
+
+
+#---------------------------------------------------------------------------
+# General QPUs Information: Criteria Verification
+#---------------------------------------------------------------------------
+def qpu_verify():
+    switched_on_plan = is_open or is_premium
     try:
         # effective Juy 1 2025, removed the warning filter & use ibm_cloud as channel for Premium Plan.
         with warnings.catch_warnings():
@@ -162,11 +229,11 @@ def focus_qpu():
             preferred_qpu = "ibm_brisbane"
 
         if service and not qpu_names:
-            print(f"\n⚛️ Quantum Plan Backend Connection Information")
-            premium_connect()
+            print(f"\n⚛️ Quantum Plan Backend Connection IBMBackend QPUs Compute Resources Information")
+            paid_plans()  # [PAID PLAN VERIFY]
             return
 
-        print("⚛️ IBM Quantum Backend Compute Resources With Available QPUs:")
+        print(f"⚛️ IBM Quantum {switched_on_plan} IBMBackend Compute Resources With Preferred QPU:")
         for name in qpu_names:
             print(f"- {name}")
 
@@ -176,23 +243,127 @@ def focus_qpu():
 
         backend = service.backend(backend_name)
         print(
-            f"✅ Version: {getattr(backend, 'version', 'N/A')}\n"
-            f"✅ Number of Qubits: {getattr(backend, 'num_qubits', 'N/A')}\n"
-            f"🎯 Preferred QPU backend: {backend.name}\n"
+            f"🖥️ Preferred QPU backend: {backend.name}\n"
+            f"🖥️ Version: {getattr(backend, 'version', 'N/A')}\n"
+            f"🖥️ Number of Qubits: {getattr(backend, 'num_qubits', 'N/A')}\n"
         )
     except Exception as e:
         print(f"ℹ️ Quantum hardware Provider's Message: {e}")
 
+
+
+#-----------------------------------------------------------------------------
+# Verify Connectivity
+#-----------------------------------------------------------------------------
+def is_verified():
+    """
+    Quantum backend connected device criteria verification & listing.
+    """
+    #1️⃣ Quantum backend connection (live QPU only): Realtime.
+    try:
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=DeprecationWarning)
+            service = QiskitRuntimeService()
+
+
+        if is_open_on == "on" and is_premium_on == "off" and is_standard_on == "off" and is_dedicated_on == "off":
+            switched_on_plan = "Open Plan"
+            backend = service.least_busy(
+                simulator=False,
+                operational=True,
+                min_num_qubits=5
+            )
+            if backend:
+                print(f"⚛️ IBM Quantum {switched_on_plan} Backend Compute Resources With Least Busy QPUs:")
+                qpus = service.backends()
+                qpu_names = [qpu.name for qpu in qpus]
+                for device in qpu_names:
+                    print(f"- {device}")
+                print(
+                    f"🖥️ Least Busy QPU backend device: {backend.name}\n"
+                    f"🖥️ Version: {getattr(backend, 'version', 'N/A')}\n"
+                    f"🖥️ Number of Qubits: {getattr(backend, 'num_qubits', 'N/A')}\n"
+                    )
+            else:
+                print(f"⛔ {switched_on_plan}: Backend QPU device not accessible - E1033.")
+                return
+        elif is_premium_on == "on" or is_standard_on == "on" or is_dedicated_on == "on" and is_open_on == "off":
+            switched_on_plan = "Premium Plan"
+            instance = os.getenv("PREMIUM_PLAN_INSTANCE", "") 
+            channel = os.getenv("PREMIUM_PLAN_CHANNEL", "") 
+            url = os.getenv("IBM_QUANTUM_API_URL", "") 
+            token = os.getenv("IQP_API_TOKEN", "") 
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", category=DeprecationWarning)
+                service = QiskitRuntimeService(
+                    instance=instance, 
+                    channel=channel, 
+                    url=url,
+                    token=token,
+                    verify=True
+                    )
+                # Try filter by instance first…
+                IBMBackends = service.backends(
+                    simulator=False,
+                    operational=True,
+                    instance=instance,
+                    min_num_qubits=5
+                    )
+                #...if the IBMBackend list is Not Empty:
+                if IBMBackends:
+                    print("Raw premium backend list:", IBMBackends)
+                    # Print just the names one‑per‑line:
+                    print("Available premium filetered backends:")
+                    for b in IBMBackends:
+                        print(f"- {b.name}")
+                        backend = IBMBackends[0]
+                        print(f"⚛️ IBM Quantum {switched_on_plan} backend Compute Resources With Available QPUs:")
+                        IBMBackend_names = [qpu.name for qpu in IBMBackends]
+                        for device in IBMBackend_names:
+                            print(f"- {device}")
+                            print(
+                                f"🖥️ First Available QPU backend device: {backend.name}\n"
+                                f"🖥️ Version: {getattr(backend, 'version', 'N/A')}\n"
+                                f"🖥️ Number of Qubits: {getattr(backend, 'num_qubits', 'N/A')}\n"
+                                ) 
+                # …but if it’s empty,
+                else:
+                    print("⚛️ QPU EMPTY RETURN NOTICE:")
+                    print("-" * 28 + "\n")
+                    print(f"🔔 {switched_on_plan} Instance:", {instance})
+                    print(f"🔔 Returned empty QPU IBMBackend list :", IBMBackends)
+                    print(f"🔔 You do not have access to this {switched_on_plan} QPUs in {instance}.\n🔔 Contact your administrator for additional help.\n ")    
+       #-----         
+        else:
+            print(f"⛔ Plan error: please activate exactly one of OPEN_PLAN or PREMIUM_PLAN (value='on').")
+            return
+    except Exception as e:
+        print(f'⚛️ Open Plan is: {is_open_on}')
+        print(f'⚛️ Premium Plan is: {is_premium_on}')
+        print(f"⛔ Quantum {switched_on_plan}: Connected but could not retrieve quantum backend QPU device: {e}")
+        return
+
+
 #------------------------------------------------
 # Footer
+#-------------------------------------------------
 def footer():
     today = datetime.today().strftime("%Y")
     print(f"\nDesign by: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador\nIBM Quantum Qiskit Software - All Rights Reserved ©{today}\n")
 
-#----------------------------
-# Execute when run as script
-#----------------------------
-if __name__ == "__main__":
-    set_plan(connect) 
-    focus_qpu()
+
+#--------------
+# Connector:
+#--------------
+def connector():
+    qiskit_save_connection(connect) 
+    qpu_verify()
+    print('\n')
+    is_verified()
     footer()
+
+#--------------------------------
+# Qiskit Connector Package Object
+#--------------------------------
+if __name__ == "__main__":
+    connector()
