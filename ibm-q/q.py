@@ -42,6 +42,9 @@ elif is_dedicated == "on":
 else:
     raise ValueError(f"⛔ No valid plan is activated. Set OPEN_PLAN or PREMIUM_PLAN to 'on'.")
 
+# -- Headers --
+header_1 = "\n⚛️ Quantum Plan Backend Connection IBMBackend QPUs Compute Resources Information:"
+empty_return_notice_header = "⚛️ [QPU EMPTY RETURN NOTICE]:"
 
 #------------------------------------------------------------------
 # Quantum Plan mapping:
@@ -213,12 +216,13 @@ def paid_plans():
 
 
 
-
 #---------------------------------------------------------------------------
 # General QPUs Information: Criteria Verification
 #---------------------------------------------------------------------------
 def qpu_verify():
-    switched_on_plan = is_open or is_premium
+    switched_on_plan = is_open_on or is_premium_on or is_dedicated_on or is_standard_on
+    paid_plan_on = is_premium_on or is_dedicated_on or is_standard_on
+    free_plan_on = is_open_on
     try:
         # effective Juy 1 2025, removed the warning filter & use ibm_cloud as channel for Premium Plan.
         with warnings.catch_warnings():
@@ -228,27 +232,40 @@ def qpu_verify():
             qpu_names = [qpu.name for qpu in qpus]
             preferred_qpu = "ibm_brisbane"
 
-        if service and not qpu_names:
-            print(f"\n⚛️ Quantum Plan Backend Connection IBMBackend QPUs Compute Resources Information")
-            paid_plans()  # [PAID PLAN VERIFY]
+        if paid_plan_on == "on" and not qpu_names:
+            print(header_1)
+            print("⚛️ IBMBackend retuned empty List[] of QPU backends - P98903.")
             return
 
-        print(f"⚛️ IBM Quantum {switched_on_plan} IBMBackend Compute Resources With Preferred QPU:")
-        for name in qpu_names:
-            print(f"- {name}")
+        elif paid_plan_on == "on" and qpu_names:
+            print(header_1)
+            paid_plans()  # [PAID PLAN API VERIFICATION SINCE IBMBACKEND FAILED]
 
-        backend_name = preferred_qpu if preferred_qpu in qpu_names else qpu_names[0]
-        if backend_name != preferred_qpu:
-            print(f"ℹ️ Preferred backend '{preferred_qpu}' not found. Falling back to '{backend_name}'")
+        elif free_plan_on == "on" and not qpu_names:
+            print(header_1)
+            print("⚛️ IBMBackend retuned empty List[] of QPU backends - F98903.")
+            return
 
-        backend = service.backend(backend_name)
-        print(
-            f"🖥️ Preferred QPU backend: {backend.name}\n"
-            f"🖥️ Version: {getattr(backend, 'version', 'N/A')}\n"
-            f"🖥️ Number of Qubits: {getattr(backend, 'num_qubits', 'N/A')}\n"
-        )
+        elif free_plan_on == "on" and qpu_names:
+            print(f"⚛️ IBM Quantum {switched_on_plan} IBMBackend Compute Resources With Preferred QPU:")
+            for name in qpu_names:
+                print(f"- {name}")
+        
+            backend_name = preferred_qpu if preferred_qpu in qpu_names else qpu_names[0]
+            if backend_name != preferred_qpu:
+                print(f"ℹ️ Preferred backend '{preferred_qpu}' not found. Falling back to '{backend_name}'")
+        
+            backend = service.backend(backend_name)
+            print(
+                f"🖥️ Preferred QPU backend: {backend.name}\n"
+                f"🖥️ Version: {getattr(backend, 'version', 'N/A')}\n"
+                f"🖥️ Number of Qubits: {getattr(backend, 'num_qubits', 'N/A')}\n"
+            )
+        else:
+            print("⚛️ Switched On Plan is Unknown - Contact your administrator")
     except Exception as e:
         print(f"ℹ️ Quantum hardware Provider's Message: {e}")
+
 
 
 
@@ -274,7 +291,7 @@ def is_verified():
                 min_num_qubits=5
             )
             if backend:
-                print(f"⚛️ IBM Quantum {switched_on_plan} Backend Compute Resources With Least Busy QPUs:")
+                print(f"⚛️ IBM Quantum {switched_on_plan} Backend Compute Resources With Least Busy QPU:")
                 qpus = service.backends()
                 qpu_names = [qpu.name for qpu in qpus]
                 for device in qpu_names:
@@ -328,7 +345,7 @@ def is_verified():
                                 ) 
                 # …but if it’s empty,
                 else:
-                    print("⚛️ QPU EMPTY RETURN NOTICE:")
+                    print(empty_return_notice_header)
                     print("-" * 28 + "\n")
                     print(f"🔔 {switched_on_plan} Instance:", {instance})
                     print(f"🔔 Returned empty QPU IBMBackend list :", IBMBackends)
