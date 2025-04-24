@@ -136,8 +136,8 @@ main() {
     echo -e "🧪 You can now start developing quantum solutions using Qiskit!\033[0m"
     echo -e "🔹 To start your quantum qiskit environment, run any of these:\033[0m"
     echo -e "\n\033[1;36m🧪 You can now start developing quantum solutions using Qiskit!:\033[0m"
-    echo -e "🖥️ Linux/macOS: \033[1;32msource ~/qiskit-v1x-env/bin/activate\033[0m"
-    echo -e "🖥️ Windows:     \033[1;32msource ~/qiskit-v1x-env/Scripts/activate\033[0m"
+    echo -e "🖥️ Linux/macOS: \033[1;32msource ~/qiskit-v2x-env/bin/activate\033[0m"
+    echo -e "🖥️ Windows:     \033[1;32msource ~/qiskit-v2x-env/Scripts/activate\033[0m"
     echo -e "\n🚀 Launch Jupyter via: \033[1;35mjupyter notebook\033[0m"
     deactivate
 }

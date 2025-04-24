@@ -1,0 +1,10 @@
+[build-system]
+requires = [
+    "setuptools>=64.0.0",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# Enable the new editable install mode for compatibility with pip 25+
+editable-mode = "compat"
