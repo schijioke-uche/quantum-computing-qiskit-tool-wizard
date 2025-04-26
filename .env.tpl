@@ -48,7 +48,7 @@ DEDICATED_IQP_BACKEND_URL="https://api.quantum-computing.ibm.com/runtime/backend
 
 # Switch "on" one plan: Use one or the other at a time. You cannot switch ALL "on" at the same time.
 #--------------------------------------------------------------------------------------------------
-OPEN_PLAN = "on"       # [Default & switched on] This plan is free - Signup :  https://quantum.cloud.ibm.com 
-STANDARD_PLAN = "off"   # This plan is paid. Switched "Off" by default - Turn it "on" after purchase.   
-PREMIUM_PLAN = "off"     # This plan is paid. Switched "Off" by default - Turn it "on" after purchase.   
-DEDICATED_PLAN = "off"  # This plan is paid. Switched "Off" by default - Turn it "on" after purchase.   
+OPEN_PLAN="on"       # [Default & switched on] This plan is free - Signup :  https://quantum.cloud.ibm.com 
+STANDARD_PLAN="off"   # This plan is paid. Switched "Off" by default - Turn it "on" after purchase.   
+PREMIUM_PLAN="off"     # This plan is paid. Switched "Off" by default - Turn it "on" after purchase.   
+DEDICATED_PLAN="off"  # This plan is paid. Switched "Off" by default - Turn it "on" after purchase.   

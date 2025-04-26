@@ -1,16 +1,31 @@
 # Author: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador
 # @Software: Qiskit 2.x Starter Tool Wizard
 
-import os
+
 import requests
 import warnings
-from qiskit_ibm_runtime import QiskitRuntimeService
+from qiskit_ibm_runtime import QiskitRuntimeService, IBMBackend
 from datetime import datetime
-from dotenv import load_dotenv
-#-------------------------
-# Load environment variabes
-load_dotenv()
+from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
+import os
+
+
+# ─── search for environment variables config file ────────
+project_dotenv = find_dotenv(raise_error_if_not_found=False)
+load_dotenv()  # Default Search & load.
+if project_dotenv:
+    load_dotenv(project_dotenv, override=True)
+else:
+    home_dotenv = Path.home() / ".env"
+    if home_dotenv.is_file():
+        load_dotenv(home_dotenv, override=True)
+    else:
+        raise FileNotFoundError(
+            "No .env found in project or at ~/.env – please create one."
+        )
 print('')
+
 
 
 #------------------------------------------------------------------
