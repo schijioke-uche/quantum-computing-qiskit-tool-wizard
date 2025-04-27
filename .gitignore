@@ -5,6 +5,7 @@
 logs
 test.py
 license-accepted-*
+commit.sh
 
 .env
 *.pyc
