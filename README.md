@@ -13,7 +13,7 @@ Additionally, the Starter Tool integrates support for the Qiskit Connector, a lo
 
 ----------------------------------------------------------------------------------------------------
 
-### ⚛️Qiskit 1.x vs 2.x Comparison (As of April 17, 2025)
+### --------------------⚛️Qiskit 1.x vs 2.x Comparison----------------------------------------- 
 
 Below is the comparison of the required packages and components used in virtual environment for Qiskit 1.x versus Qiskit 2.x, along with deprecation notes and migration guidance.
 
