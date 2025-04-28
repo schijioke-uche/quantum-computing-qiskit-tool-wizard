@@ -2,7 +2,7 @@
 
 #-------------------------------------------
 # @Author: Dr. Jeffrey Chijioke-Uche, IBM
-# @Sofware: Qiskit v2.x Starter Tool Wizard
+# @Sofware: Qiskit v2.x Starter Tool Wizard 
 #-------------------------------------------
 
 set -e # 🎨 Helper
@@ -99,6 +99,7 @@ package_install() {
     print_step "Installing Qiskit v2.x & its ecosystem..."
     pip install         \
         qiskit           \
+        qiskit-connector  \
         qiskit-aer        \
         qiskit-algorithms  \
         qiskit-optimization \
@@ -119,7 +120,6 @@ package_install() {
     echo "" 
     print_success "All Qiskit v2.x packages installed!"
     echo -e "\033[1;36m🌌 QUANTUM PLAN ACCOUNT BACKEND CONNECTION\033[0m"
-    quantum_plans
     print_step "Purging pip cache..."
     pip cache purge || print_warning "Pip cache purge failed."
 }
