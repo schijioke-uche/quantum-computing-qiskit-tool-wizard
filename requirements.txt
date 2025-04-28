@@ -8,4 +8,9 @@ qiskit-ibm-runtime
 qiskit-ibm-catalog
 qiskit-nature
 qiskit-nature-pyscf
-qiskit-serverless
+
+s3fs==2023.12.2
+fsspec==2023.12.2
+qiskit-serverless==0.14.2
+
+
