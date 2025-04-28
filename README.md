@@ -82,7 +82,7 @@ Below is the comparison of the required packages and components used in virtual 
 
 ##### Step-1
 ```sh
-git clone https://github.com/schijioke-uche/quantum-qiskit-startertool-wizard.git
+git clone https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard.git
 ```
 
 ##### Step-2: Change directory
