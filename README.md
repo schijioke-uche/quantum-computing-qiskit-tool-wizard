@@ -113,5 +113,11 @@ vi .env
 ```
 
 ----------------------------------------------
+
+###### Try Use Cases With Your New Environment
+
+[Try Quantum Use Cases](https://github.com/schijioke-uche/quantum-qiskit)
+
+----------------------------------------------
 #####  Author
 ###### Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador
