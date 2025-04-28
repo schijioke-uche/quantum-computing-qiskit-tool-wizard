@@ -1,5 +1,5 @@
 # .github/workflows/pytest.yml
-name: Qiskit Starter Tool Wizard Python Version Compatibility
+name: Qiskit Starter Tool Wizard Python Version Compatibility - v3.9,v3.10,v3.11,v3.12
 
 on:
   push:
