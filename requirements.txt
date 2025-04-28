@@ -1,5 +1,5 @@
 
-qiskit==2.0.0
+qiskit
 qiskit-connector==2.1.1
 qiskit-aer
 qiskit-algorithms
