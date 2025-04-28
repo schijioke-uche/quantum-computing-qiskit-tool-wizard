@@ -75,7 +75,7 @@ Below is the comparison of the required packages and components used in virtual 
 ![IBM Quantum](./_media/_startertools3.png)
 
 #### Before you start the installation, you need to have:
-- Python v3.10+ Installed
+- Python v3.10+ Installed  (Minimum Requirement)
 - Operating system with 64bit (32bit OS is not supported by Qiskit)
 
 #### Steps to Install Qiskit v2.x Virtual Development Environment
