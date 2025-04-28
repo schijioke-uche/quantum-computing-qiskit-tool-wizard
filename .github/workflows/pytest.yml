@@ -27,9 +27,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install flake8 pytest
+
+          # Skip for Python 3.9 and 3.13
           if [ -f requirements.txt ]; then
             if [ "${{ matrix.python-version }}" = "3.9" ]; then
               # Install all requirements except qiskit-serverless for Python 3.9
+              grep -v '^qiskit-serverless' requirements.txt > filtered-reqs.txt
+              pip install -r filtered-reqs.txt
+            elif [ "${{ matrix.python-version }}" = "3.13" ]; then
+              # Install all requirements except qiskit-serverless for Python 3.13
               grep -v '^qiskit-serverless' requirements.txt > filtered-reqs.txt
               pip install -r filtered-reqs.txt
             else
@@ -44,7 +50,7 @@ jobs:
 
       - name: Test Python Import for qiskit and qiskit_connector
         run: |
-          python -c "import qiskit; from qiskit_connector import connector; print('test successful')"
+          python -c "import qiskit; from qiskit_connector import connector; print('✅ Test successful!')"
         continue-on-error: true
 
       - name: Check Python Import Result
