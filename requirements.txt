@@ -1,5 +1,7 @@
+requests
+python-dotenv
 qiskit           
-qiskit-connector  
+qiskit-connector== 
 qiskit-aer        
 qiskit-algorithms  
 qiskit-optimization 
