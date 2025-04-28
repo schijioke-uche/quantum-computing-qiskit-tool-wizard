@@ -110,8 +110,8 @@ package_install() {
         matplotlib                 \
         jupyter                     \
         pyscf                      \
-        #qiskit-algorithms  \  IBM no longer support this package.
-        #qiskit-optimization \
+        #qiskit-algorithms  \  skipped
+        #qiskit-optimization \  skipped
     echo "" 
     echo -e "\033[1;33m$bnd\033[0m"
     python -m pip freeze
