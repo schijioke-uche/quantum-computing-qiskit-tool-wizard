@@ -2,6 +2,7 @@
 qiskit
 qiskit-connector==2.1.1
 qiskit-aer
+
 qiskit-ibm-runtime
 qiskit-ibm-catalog
 qiskit-nature
@@ -10,5 +11,8 @@ qiskit-nature-pyscf
 s3fs==2023.12.2
 fsspec==2023.12.2
 qiskit-serverless==0.14.2
+
+#qiskit-algorithms
+#qiskit-optimization
 
 

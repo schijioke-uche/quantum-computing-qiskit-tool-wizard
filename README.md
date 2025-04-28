@@ -1,4 +1,4 @@
-###   ⚛️ Quantum Qiskit v2.x Tool Installation Wizard
+###   ⚛️ Quantum Computing Qiskit Tool Wizard
 
 [![Qiskit Starter Tool Wizard Python Version Compatibility - v3.9,v3.10,v3.11,v3.12](https://github.com/schijioke-uche/quantum-qiskit-v2x-startertool-wizard/actions/workflows/pytest.yml/badge.svg)](https://github.com/schijioke-uche/quantum-qiskit-v2x-startertool-wizard/actions/workflows/pytest.yml)
 

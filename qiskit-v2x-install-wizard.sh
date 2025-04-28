@@ -97,22 +97,21 @@ package_install() {
     print_step "Upgrading pip, setuptools, and wheel..."
     pip install --upgrade pip setuptools wheel
     print_step "Installing Qiskit Tool Ecosystem..."
-    pip install         \
-        qiskit           \
-        qiskit-connector  \
-        qiskit-aer        \
-        qiskit-algorithms  \
-        qiskit-optimization \
+    pip install          \
+        qiskit            \
+        qiskit-connector   \
+        qiskit-aer          \
         qiskit-ibm-runtime   \
-        qiskit-nature        \
-        qiskit-nature-pyscf   \
-        qiskit-serverless      \
-        qiskit-ibm-catalog      \
+        qiskit-nature         \
+        qiskit-nature-pyscf    \
+        qiskit-serverless       \
+        qiskit-ibm-catalog       \
         python-dotenv             \
-        clean-dotenv               \
-        matplotlib                  \
-        jupyter                      \
-        pyscf    
+        matplotlib                 \
+        jupyter                     \
+        pyscf                      \
+        #qiskit-algorithms  \  IBM no longer support this package.
+        #qiskit-optimization \
     echo "" 
     echo -e "\033[1;33m$bnd\033[0m"
     python -m pip freeze
