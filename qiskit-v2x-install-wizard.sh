@@ -96,7 +96,7 @@ quantum_plans() {
 package_install() {
     print_step "Upgrading pip, setuptools, and wheel..."
     pip install --upgrade pip setuptools wheel
-    print_step "Installing Qiskit v2.x & its ecosystem..."
+    print_step "Installing Qiskit Tool Ecosystem..."
     pip install         \
         qiskit           \
         qiskit-connector  \
