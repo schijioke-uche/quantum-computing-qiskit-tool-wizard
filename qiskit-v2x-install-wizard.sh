@@ -109,7 +109,7 @@ package_install() {
         python-dotenv             \
         matplotlib                 \
         jupyter                     \
-        pyscf                      \
+        pyscf                        \
         #qiskit-algorithms  \  skipped
         #qiskit-optimization \  skipped
     echo "" 

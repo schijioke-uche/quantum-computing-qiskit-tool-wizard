@@ -43,8 +43,7 @@ remove_packages_in_env() {
     pip uninstall -y    \
         qiskit           \
         qiskit-aer        \
-        qiskit-terra      \
-        qiskit-algorithms  \
+        qiskit-terra       \
         qiskit-ibm-runtime  \
         qiskit-nature        \
         qiskit-nature-pyscf   \
