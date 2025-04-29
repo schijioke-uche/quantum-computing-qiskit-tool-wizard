@@ -90,17 +90,7 @@ git clone https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard
 cd quantum-qiskit-v2x-startertool-wizard
 ```
 
-##### Step-3: Activate the quantum environmental file
-```sh
-cp .env.tpl .env
-```
-
-##### Step-4:  Add the required field values then quit screen
-```sh
-vi .env
-```
-
-##### Step-5: Run the install wizard
+##### Step-3: Run the install wizard
 ```sh
 ./qiskit-v2x-install-wizard.sh
 ```
