@@ -1,6 +1,7 @@
 ###   ⚛️ Quantum Computing Qiskit Tool Wizard
 
 [![Qiskit Starter Tool Wizard Python Version Compatibility - v3.9,v3.10,v3.11,v3.12 ](https://github.com/schijioke-uche/quantum-qiskit-v2x-startertool-wizard/actions/workflows/pytest.yml/badge.svg)](https://github.com/schijioke-uche/quantum-qiskit-v2x-startertool-wizard/actions/workflows/pytest.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15303640.svg)](https://doi.org/10.5281/zenodo.15303640)
 
 ######  By: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador & IBM Research
 ----------------------------------------------------------------------------
