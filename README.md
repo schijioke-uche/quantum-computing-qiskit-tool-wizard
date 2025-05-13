@@ -1,11 +1,12 @@
 ###   ⚛️ Quantum Computing Qiskit Tool Wizard
 
 [![Qiskit Starter Tool Wizard Python Version Compatibility - v3.9,v3.10,v3.11,v3.12 ](https://github.com/schijioke-uche/quantum-qiskit-v2x-startertool-wizard/actions/workflows/pytest.yml/badge.svg)](https://github.com/schijioke-uche/quantum-qiskit-v2x-startertool-wizard/actions/workflows/pytest.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15303640.svg)](https://doi.org/10.5281/zenodo.15303640)
 
 ######  By: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador & IBM Research
 ----------------------------------------------------------------------------
 The Quantum Computing Qiskit Tool Wizard software is purpose-built for Quantum Application Developers across industries who require a fast, reliable, and standardized way to set up their quantum development environments. The tool automates the creation of a Qiskit compliant virtual environment, tailored specifically for quantum application design, research, and production use cases. It empowers users to seamlessly activate and deactivate the environment on demand, maintaining flexibility while reducing setup friction. With compatibility across Python versions >=v3.9+ , it ensures a broad and future-proof development experience for quantum engineers working on varied hardware and cloud platforms.
-<br>
+<br>   
 <br>
 Additionally, the Starter Tool integrates support for the Qiskit Connector, a low-code extension that simplifies real-time access to IBM Quantum backends using just the backend keyword. This powerful feature drastically accelerates how developers test, simulate, and deploy quantum circuits by eliminating repetitive setup code and reducing error-prone configuration steps. As a result, quantum developers can focus more on algorithm innovation and application design, achieving higher productivity and shorter time-to-solution cycles — all while operating in a clean, isolated, and production-ready environment optimized for quantum software engineering.
 
@@ -90,17 +91,7 @@ git clone https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard
 cd quantum-qiskit-v2x-startertool-wizard
 ```
 
-##### Step-3: Activate the quantum environmental file
-```sh
-cp .env.tpl .env
-```
-
-##### Step-4:  Add the required field values then quit screen
-```sh
-vi .env
-```
-
-##### Step-5: Run the install wizard
+##### Step-3: Run the install wizard
 ```sh
 ./qiskit-v2x-install-wizard.sh
 ```
