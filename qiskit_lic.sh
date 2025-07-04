@@ -16,49 +16,57 @@ print_warning()  { echo -e "\033[1;33m⚠️  $1\033[0m"; }
 print_notice()   { echo -e "\033[1;35m📌 $1\033[0m"; }
 print_running()  { echo -e "\033[1;34m🏃 $1\033[0m"; }
 print_info()     { echo -e "\033[1;37mℹ️  $1\033[0m"; }
-print_special_notice()  { echo -e "\033[1;37mℹ  $1\033[0m"; }
+print_special_notice()  { echo -e "\033[1;37m$1\033[0m"; }
+print_special_success() { echo -e "\033[1;32m$1\033[0m"; }
+print_special_info()     { echo -e "\033[1;34m  $1\033[0m"; }
+
 
 # License agreement function
 license_accept() {
-  local BND="-------------------------------------------------------------------------------------------------------------------------------------------"
+  local BND="----------------------------------------------------------------------------------------------------------------------------"
   local LIC="--------------------------------------------------------------------------------------------------------------------"
   local LICENSE_FILE="$ROOT_DIR/LICENSE"
   local STORE_DIR="$ROOT_DIR/license-accepted"
+  local accepted_date
+  accepted_date=$(date +"%m-%d-%Y")
+  local accepted_file="$STORE_DIR/qwizard-license-accepted-$accepted_date"
 
-  echo ''
-  echo "$BND"
-  echo "📄 LICENSE AGREEMENT"
-  echo "$BND"
+  print_special_notice "$BND"
+  print_special_success "📄 LICENSE AGREEMENT"
+  print_special_notice "$BND"
 
-  # Ensure LICENSE exists in project root
+  # Check if license was previously accepted
+  if [[ -f "$accepted_file" ]]; then
+    print_special_info "License previously accepted on: $accepted_date"
+    return 0
+  fi
+
+  # Show license content
   if [[ -f "$LICENSE_FILE" ]]; then
     cat "$LICENSE_FILE"
   else
     print_error "License file not found in project root: $LICENSE_FILE"
-    echo ''
     exit 1
   fi
 
-  echo ''
   echo "$BND"
   read -rp "Do you accept the terms of the license? [accept/decline]: " user_input
 
   case "$user_input" in
     accept|ACCEPT|Accept)
-      echo ""
-      print_success "License accepted. Proceeding with Qiskit software installation..."
-      local accepted_date
-      accepted_date=$(date +"%m-%d-%Y")
-      mkdir -p "$STORE_DIR"
+      # Clear screen or push license content off screen
+      sleep 1
+      clear || for i in {1..30}; do echo ""; done
 
-      # Signature metadata
+      print_success "License accepted. Proceeding with Qiskit software installation..."
+
+      mkdir -p "$STORE_DIR"
       local user_ip
       user_ip=$(hostname -I | awk '{print $1}')
       local timestamp
       timestamp=$(date +"%Y-%m-%d %H:%M:%S")
       local license_hash
       license_hash=$(echo -n "$user_ip-$timestamp" | sha256sum | awk '{print $1}')
-      local accepted_file="$STORE_DIR/license-accepted-$accepted_date"
 
       {
         echo "STATUS: ACCEPTED"
@@ -80,5 +88,6 @@ license_accept() {
   esac
 }
 
+#---------------------------------------------------------------------------------------------------------------------
 # Run
 license_accept

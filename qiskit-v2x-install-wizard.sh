@@ -31,12 +31,24 @@ mask_path() {
   echo "$masked"
 }
 
-# DO NOT EDIT BELOW THIS LINE:PROPRIETARY LICENSE CHECK
+
+# DO NOT EDIT BELOW THIS LINE:PROPRIETARY LICENSE CHECK:[1] License Acceptance
+CHECK_STORE_DIR="$ROOT_DIR/license-accepted"
+check_accepted_date=$(date +"%m-%d-%Y")
+check_accepted_file="$CHECK_STORE_DIR/qwizard-license-accepted-$check_accepted_date"
+license_location_for_after_read(){
+  if [[ "$check_accepted_file" =~ qwizard-license-accepted-.* ]]; then
+    print_info "Software License: https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard/blob/main/LICENSE"
+    return 0
+  fi
+}
+
+# DO NOT EDIT BELOW THIS LINE:PROPRIETARY LICENSE CHECK: [2] License Check
 software_license_check(){
   local lic_check
   lic_check="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/LICENSE"
   if [[ -f "$lic_check" ]]; then
-    print_success "License found: $lic_check"
+    print_success "Software License: https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard/blob/main/LICENSE"
     source ./qiskit_lic.sh
   else
     print_error "License not found in project root."
