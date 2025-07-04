@@ -25,6 +25,11 @@ print_notice()   { echo -e "\033[1;35m📌 $1\033[0m"; }
 print_running()  { echo -e "\033[1;34m🏃 $1\033[0m"; }
 print_info()     { echo -e "\033[1;37mℹ️  $1\033[0m"; }
 
+mask_path() {
+  local path="$1"
+  local masked=$(echo "$path" | sed -E "s|^$HOME|~|;s|/[^/]+|/***|g")
+  echo "$masked"
+}
 
 # GLOBAL
 VENV_NAME="qiskit-v2x-env"
@@ -52,7 +57,9 @@ check_uv() {
     fi
   fi
 
-  print_success "uv is available: $(which uv)"
+  UV_PATH=$(which uv)
+  MASKED_UV_PATH="$(dirname "$UV_PATH" | sed 's|.*|/***********|')/$(basename "$UV_PATH")"
+  print_success "uv is available: $MASKED_UV_PATH"
 }
 
 # [2] Create Python venv
@@ -60,8 +67,15 @@ create_venv() {
   print_step "Creating virtual environment: $VENV_NAME"
   python3 -m venv "$VENV_PATH"
   source "$VENV_PATH/bin/activate"
-  print_success "Virtual environment created at $VENV_PATH"
+
+  # Mask everything under $HOME except final directory
+  RESOLVED_HOME=$(realpath "$HOME")
+  LAST_DIR=$(basename "$VENV_PATH")
+  DISPLAY_PATH="~/***/$LAST_DIR"
+
+  print_success "Qiskit virtual environment created at: $DISPLAY_PATH"
 }
+
 
 # [3] Install Qiskit with uv
 install_qiskit() {
