@@ -10,17 +10,20 @@ The Quantum Computing Qiskit Tool Wizard software is purpose-built for Quantum
 <br>
 Additionally, the Starter Tool integrates support for the Qiskit Connector, a low-code extension that simplifies real-time access to IBM Quantum backends using just the backend keyword. This powerful feature drastically accelerates how developers test, simulate, and deploy quantum circuits by eliminating repetitive setup code and reducing error-prone configuration steps. As a result, quantum developers can focus more on algorithm innovation and application design, achieving higher productivity and shorter time-to-solution cycles — all while operating in a clean, isolated, and production-ready environment optimized for quantum software engineering.
 
-----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 
 ---
 #### Output Samples
-![IBM Quantum](./_media/_startertools2.png)
 
-![IBM Quantum](./_media/_startertools3.png)
+![IBM Quantum](./_media/_startertools4.png)
 
 #### Before you start the installation, you need to have:
-- Python v3.10+ Installed  (Minimum Requirement)
+- Python v3.12+ Installed  (Minimum Requirement)
 - Operating system with 64bit (32bit OS is not supported by Qiskit)
+- Recommended OS:  
+   - Linux (All Distributions) 
+   - macOS(All Distributions)
+   - Windows OS (WSL)
 
 #### Steps to Install Qiskit v2.x Virtual Development Environment
 
@@ -41,16 +44,10 @@ cd quantum-qiskit-v2x-startertool-wizard
 
 ----------------------------------------------
 
-######  Removal of Installation
+######  Removal of Qiskit Installation & Virtual Environment
 ```sh
-./qiskit-v2x-remove-wizard.sh
+rm -rf  ~/qiskit-v2x-env
 ```
-
-----------------------------------------------
-
-###### Try Use Cases With Your New Environment
-
-[Try Quantum Use Cases](https://github.com/schijioke-uche/quantum-qiskit)
 
 ----------------------------------------------
 #####  Author
