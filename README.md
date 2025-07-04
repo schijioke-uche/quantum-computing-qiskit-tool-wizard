@@ -29,10 +29,9 @@ This table outlines the system requirements for running the software. This is **
 | **Recommended OS** | Linux (All Distributions)                      |
 |                    | macOS (All Distributions)                      |
 |                    | Windows OS (WSL)                               |
-| :----------------- | :--------------------------------------------- |
-
+ 
 ###### Additional Information:
-- Python v3.11+ Installed  (Minimum Requirement)
+- Python v3.11 as the minimum required but tested on 3.10 & it was a success.
 - Operating system with 64bit (32bit OS is not supported by Qiskit)
 - Recommended OS:  
    - Linux (All Distributions) 
