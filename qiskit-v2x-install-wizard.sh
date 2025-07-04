@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 
-#--------------------------------------------------------
-# Qiskit v2.x Installer Wizard
-# Author: Dr. Jeffrey Chijioke-Uche, IBM Quantum Ambassador
-#--------------------------------------------------------
+#---------------------------------------------------------------------------------------------
+# @Project: Quantum Computing Qiskit v2.x Tool Wizard
+# @Technology: Quantum Computing, Qiskit
+# @File: qiskit-v2x-install-wizard.sh
+# @Description: Qiskit v2.x Installer Wizard
+# @Version: 1.0.0
+# @Date: 2024-01-01
+# @License: Apache-2.0
+# @Title: Qiskit v2.x Installer Wizard
+# @Software Author: Dr. Jeffrey Chijioke-Uche, IBM Computer Science & Quantum Ambassador
+#---------------------------------------------------------------------------------------------
 
 set -e
 source ./lib/wizard.sh
@@ -88,7 +95,7 @@ show_summary() {
   echo -e "\n\033[1;36m${bnd}\033[0m"
   print_success "Qiskit Virtual Environment & Tools Setup Complete!"
   print_info "\033[1;36mActivate qiskit virtual environment by running\033[0m: \033[1;35msource ~/qiskit-v2x-env/bin/activate\033[0m"
-  echo -e "\033[1;36mBasic Qiskit Tools Installed\033[0m"
+  echo -e "\033[1;36m🖥️ Basic Qiskit Tools Installed\033[0m"
   pip list | grep qiskit
   echo -e "\033[1;36m🖥️ Open Jupyter by running\033[0m: \033[1;35mjupyter notebook\033[0m"
   echo -e "\033[1;36m${bnd}\033[0m"
