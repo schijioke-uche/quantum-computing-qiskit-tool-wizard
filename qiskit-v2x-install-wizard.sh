@@ -73,7 +73,7 @@ install_qiskit() {
     pyscf >/dev/null 2>&1
 
   print_success "Qiskit packages installed."
-  uv pip cache purge >/dev/null 2>&1 || print_info "uv cache purge failed."
+  uv pip cache purge >/dev/null 2>&1 || print_info "uv cache purge is not necessary - This is a Lightweight Installation."
 }
 
 # [4] Install Jupyter
@@ -86,11 +86,11 @@ install_jupyter() {
 # [5] Display Qiskit Tool Summary
 show_summary() {
   echo -e "\n\033[1;36m${bnd}\033[0m"
-  print_success "Qiskit setup complete!"
-  echo "Activate it using: source ~/qiskit-v2x-env/bin/activate"
-  echo -e "\n\033[1;36mBasic Qiskit Tools Installed\033[0m"
+  print_success "Qiskit Virtual Environment & Tools Setup Complete!"
+  print_info "\033[1;36mActivate qiskit virtual environment by running\033[0m: \033[1;35msource ~/qiskit-v2x-env/bin/activate\033[0m"
+  echo -e "\033[1;36mBasic Qiskit Tools Installed\033[0m"
   pip list | grep qiskit
-  echo -e "\nLaunch Jupyter using: \033[1;35mjupyter notebook\033[0m"
+  echo -e "\033[1;36m🖥️ Open Jupyter by running\033[0m: \033[1;35mjupyter notebook\033[0m"
   echo -e "\033[1;36m${bnd}\033[0m"
   deactivate
 }
@@ -155,7 +155,6 @@ qiskit_development_environment() {
     print_success "✅ Qiskit and dependencies installed successfully."
     print_step "🧪 Installed Qiskit Packages:"
     "$FULL_WINDOWS_PATH\\Scripts\\python.exe" -m pip list | findstr qiskit
-
     print_notice "Activate your environment using the instructions below:"
     echo -e "\nIf you are using \033[1;35mCommand Prompt (cmd.exe)\033[0m:"
     echo -e "  \033[1;32m$FULL_WINDOWS_PATH\\Scripts\\activate.bat\033[0m"
