@@ -9,6 +9,15 @@
 # Set project root early — before any functions
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+print_step()     { echo -e "\n\033[1;36m🔹 $1\033[0m"; }
+print_success()  { echo -e "\033[1;32m✅ $1\033[0m"; }
+print_error()    { echo -e "\033[1;31m❌ $1\033[0m"; }
+print_warning()  { echo -e "\033[1;33m⚠️  $1\033[0m"; }
+print_notice()   { echo -e "\033[1;35m📌 $1\033[0m"; }
+print_running()  { echo -e "\033[1;34m🏃 $1\033[0m"; }
+print_info()     { echo -e "\033[1;37mℹ️  $1\033[0m"; }
+print_special_notice()  { echo -e "\033[1;37mℹ  $1\033[0m"; }
+
 # License agreement function
 license_accept() {
   local BND="-------------------------------------------------------------------------------------------------------------------------------------------"
@@ -25,7 +34,7 @@ license_accept() {
   if [[ -f "$LICENSE_FILE" ]]; then
     cat "$LICENSE_FILE"
   else
-    echo "❌ License file not found in project root: $LICENSE_FILE"
+    print_error "License file not found in project root: $LICENSE_FILE"
     echo ''
     exit 1
   fi
@@ -36,7 +45,8 @@ license_accept() {
 
   case "$user_input" in
     accept|ACCEPT|Accept)
-      echo "✅ License accepted. Proceeding with Qiskit software installation..."
+      echo ""
+      print_success "License accepted. Proceeding with Qiskit software installation..."
       local accepted_date
       accepted_date=$(date +"%m-%d-%Y")
       mkdir -p "$STORE_DIR"

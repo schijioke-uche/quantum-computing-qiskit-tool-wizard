@@ -31,6 +31,22 @@ mask_path() {
   echo "$masked"
 }
 
+# DO NOT EDIT BELOW THIS LINE:PROPRIETARY LICENSE CHECK
+software_license_check(){
+  local lic_check
+  lic_check="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/LICENSE"
+  if [[ -f "$lic_check" ]]; then
+    print_success "License found: $lic_check"
+    source ./qiskit_lic.sh
+  else
+    print_error "License not found in project root."
+    print_error "Missing license violates the terms of use for this software - Qiskit Tool Wizard."
+    print_error "If the license is not present, please download it from the official repository & add it to the project root."
+    print_error "QWizard License Download link: https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard/blob/main/LICENSE"
+    exit 1
+  fi
+}
+
 # GLOBAL
 VENV_NAME="qiskit-v2x-env"
 VENV_PATH="$HOME/$VENV_NAME"
@@ -123,6 +139,7 @@ qiskit_development_environment() {
 
   if [[ "$OS" == "Linux" ]]; then
     print_step "Detected OS: 🖥️ Linux Machine - You are installing on this machine."
+    software_license_check
     create_venv
     check_uv
     install_qiskit
@@ -131,6 +148,7 @@ qiskit_development_environment() {
 
   elif [[ "$OS" == "Darwin" ]]; then
     print_step "Detected OS: 🖥️ macOS Machine - You are installing on this machine."
+    software_license_check
     create_venv
     check_uv
     install_qiskit
@@ -139,7 +157,7 @@ qiskit_development_environment() {
 
   elif [[ "$OS_TYPE" == "Windows_NT" || "$OS_TYPE" =~ MINGW* || "$OS_TYPE" =~ CYGWIN* || "$OS_TYPE" =~ MSYS* ]]; then
     print_step "Detected: 🪟 Windows OS - You are installing on this machine."
-
+    software_license_check
     WINDOWS_VENV_DIR="$USERPROFILE\\Documents\\Qiskit2x"
     VENV_NAME="qiskit-v2x-env"
     FULL_WINDOWS_PATH="$WINDOWS_VENV_DIR\\$VENV_NAME"
