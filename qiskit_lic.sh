@@ -91,6 +91,7 @@ license_accept() {
   echo -e "\n\033[1;36m${bnd}\033[0m"
   source ./lib/wizard-check.sh
   check_status_qtool_wizard
+   echo -e "\n\033[1;36m${bnd}\033[0m"
   print_success "License accepted. Qiskit Tool Wizard Software v2.2.9"
 }
 
