@@ -23,7 +23,7 @@ Additionally, the Starter Tool integrates support for the Qiskit Connector, a lo
 - Recommended OS:  
    - Linux (All Distributions) 
    - macOS(All Distributions)
-   - Windows OS (WSL)
+   - Windows OS (WSL) -  [See Microsoft Documentation](https://learn.microsoft.com/en-us/windows/wsl/install)
 
 #### Steps to Install Qiskit v2.x Virtual Development Environment
 
