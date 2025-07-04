@@ -17,7 +17,21 @@ Additionally, the Starter Tool integrates support for the Qiskit Connector, a lo
 
 ![IBM Quantum](./_media/_startertools4.png)
 
-#### Before you start the installation, you need to have:
+#### Before you start the installation, you need to be aware of the system requirements:
+
+##### System Requirements
+
+This table outlines the system requirements for running the software. This is **PRODUCTION** documentation.
+| Requirement        | Details                                        |
+| :----------------- | :--------------------------------------------- |
+| **Python Version** | v3.11+ (Minimum Requirement)                   |
+| **OS Architecture**| 64-bit                                         |
+| **Recommended OS** | Linux (All Distributions)                      |
+|                    | macOS (All Distributions)                      |
+|                    | Windows OS (WSL)                               |
+| :----------------- | :--------------------------------------------- |
+
+###### Additional Information:
 - Python v3.11+ Installed  (Minimum Requirement)
 - Operating system with 64bit (32bit OS is not supported by Qiskit)
 - Recommended OS:  
