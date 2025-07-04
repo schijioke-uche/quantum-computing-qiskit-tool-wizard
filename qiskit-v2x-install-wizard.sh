@@ -6,6 +6,7 @@
 #--------------------------------------------------------
 
 set -e
+source ./lib/wizard.sh
 bnd="----------------------------------------------------------------------------------------------------------------------------"
 START_TIME=$(date +%s)
 
@@ -82,12 +83,12 @@ install_jupyter() {
   print_success "Jupyter installed."
 }
 
-# [5] Display Summary
+# [5] Display Qiskit Tool Summary
 show_summary() {
   echo -e "\n\033[1;36m${bnd}\033[0m"
   print_success "Qiskit setup complete!"
   echo "Activate it using: source ~/qiskit-v2x-env/bin/activate"
-  echo -e "\n\033[1;36mInstalled Packages:\033[0m"
+  echo -e "\n\033[1;36mBasic Qiskit Tools Installed\033[0m"
   pip list | grep qiskit
   echo -e "\nLaunch Jupyter using: \033[1;35mjupyter notebook\033[0m"
   echo -e "\033[1;36m${bnd}\033[0m"
@@ -96,11 +97,11 @@ show_summary() {
 
 # [6] Main flow
 qiskit_development_environment() {
-  echo -e "\n\033[1;34m🔹 Starting Qiskit Environment Setup...\033[0m"
+  echo -e "\n\033[1;34m${QTOOL_WIZARD}\033[0m"
   OS=$(uname -s)
 
   if [[ "$OS" == "Linux" ]]; then
-    print_step "Detected OS: Linux"
+    print_step "Detected OS: 🖥️ Linux Machine - You are installing on this machine."
     create_venv
     check_uv
     install_qiskit
@@ -108,7 +109,7 @@ qiskit_development_environment() {
     show_summary
 
   elif [[ "$OS" == "Darwin" ]]; then
-    print_step "Detected OS: macOS"
+    print_step "Detected OS: 🖥️ macOS Machine - You are installing on this machine."
     create_venv
     check_uv
     install_qiskit
@@ -116,9 +117,9 @@ qiskit_development_environment() {
     show_summary
 
   elif [[ "$OS_TYPE" == "Windows_NT" || "$OS_TYPE" =~ MINGW* || "$OS_TYPE" =~ CYGWIN* || "$OS_TYPE" =~ MSYS* ]]; then
-    print_step "🪟 Windows OS Detected"
-    
-    WINDOWS_VENV_DIR="$USERPROFILE\\Documents\\QiskitProject"
+    print_step "Detected: 🪟 Windows OS - You are installing on this machine."
+
+    WINDOWS_VENV_DIR="$USERPROFILE\\Documents\\Qiskit2x"
     VENV_NAME="qiskit-v2x-env"
     FULL_WINDOWS_PATH="$WINDOWS_VENV_DIR\\$VENV_NAME"
 
@@ -160,10 +161,10 @@ qiskit_development_environment() {
     echo -e "  \033[1;32m$FULL_WINDOWS_PATH\\Scripts\\activate.bat\033[0m"
     echo -e "\nIf you are using \033[1;35mPowerShell\033[0m:"
     echo -e "  \033[1;32m$FULL_WINDOWS_PATH\\Scripts\\Activate.ps1\033[0m"
-    echo -e "\n🖥️ Jupyter Launch: \033[1;35mjupyter notebook\033[0m"
+    echo -e "\033[1;36m🖥️ Open Jupyter\033[0m: \033[1;35mjupyter notebook\033[0m"
 
   else
-    print_error "Your OS is not supported."
+    print_error "Your OS is not supported. Please use Linux, macOS, or Windows."
     exit 1
   fi
 }
