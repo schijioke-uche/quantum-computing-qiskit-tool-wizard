@@ -24,6 +24,7 @@ Additionally, the Starter Tool integrates support for the Qiskit Connector, a lo
    - Linux (All Distributions) 
    - macOS(All Distributions)
    - Windows OS (WSL) -  [See Microsoft Documentation](https://learn.microsoft.com/en-us/windows/wsl/install)
+     - To install on Windows OS Native via CMD.exe - You will need Cygwin - [See Cygwin for Windows](https://www.cygwin.com/install.html)
 
 #### Steps to Install Qiskit v2.x Virtual Development Environment
 
