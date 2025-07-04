@@ -13,7 +13,7 @@
 #---------------------------------------------------------------------------------------------
 
 set -e
-source ./lib/wizard.sh
+  source ./lib/wizard.sh
 bnd="----------------------------------------------------------------------------------------------------------------------------"
 START_TIME=$(date +%s)
 
@@ -32,17 +32,6 @@ mask_path() {
 }
 
 
-# DO NOT EDIT BELOW THIS LINE:PROPRIETARY LICENSE CHECK:[1] License Acceptance
-CHECK_STORE_DIR="$ROOT_DIR/license-accepted"
-check_accepted_date=$(date +"%m-%d-%Y")
-check_accepted_file="$CHECK_STORE_DIR/qwizard-license-accepted-$check_accepted_date"
-license_location_for_after_read(){
-  if [[ "$check_accepted_file" =~ qwizard-license-accepted-.* ]]; then
-    print_info "Software License: https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard/blob/main/LICENSE"
-    return 0
-  fi
-}
-
 # DO NOT EDIT BELOW THIS LINE:PROPRIETARY LICENSE CHECK: [2] License Check
 software_license_check(){
   local lic_check
@@ -50,6 +39,7 @@ software_license_check(){
   if [[ -f "$lic_check" ]]; then
     print_success "Software License: https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard/blob/main/LICENSE"
     source ./qiskit_lic.sh
+
   else
     print_error "License not found in project root."
     print_error "Missing license violates the terms of use for this software - Qiskit Tool Wizard."
@@ -144,11 +134,14 @@ show_summary() {
   deactivate
 }
 
+
 # [6] Main flow
 qiskit_development_environment() {
   echo -e "\n\033[1;34m${QTOOL_WIZARD}\033[0m"
-  OS=$(uname -s)
+  source ./lib/wizard-check.sh
+  check_status_qtool_wizard
 
+  OS=$(uname -s)
   if [[ "$OS" == "Linux" ]]; then
     print_step "Detected OS: 🖥️ Linux Machine - You are installing on this machine."
     software_license_check
@@ -203,7 +196,7 @@ qiskit_development_environment() {
       python-dotenv \
       pyscf >nul 2>&1
 
-    print_success "✅ Qiskit and dependencies installed successfully."
+    print_success "Qiskit and dependencies installed successfully."
     print_step "🧪 Installed Qiskit Packages:"
     "$FULL_WINDOWS_PATH\\Scripts\\python.exe" -m pip list | findstr qiskit
     print_notice "Activate your environment using the instructions below:"

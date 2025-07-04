@@ -6,6 +6,7 @@
 # @Usage:    Install Qiskit software and its dependencies
 # @License:  Qiskit Tool License
 
+source ./lib/wizard.sh
 # Set project root early — before any functions
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -20,7 +21,7 @@ print_special_notice()  { echo -e "\033[1;37m$1\033[0m"; }
 print_special_success() { echo -e "\033[1;32m$1\033[0m"; }
 print_special_info()     { echo -e "\033[1;34m  $1\033[0m"; }
 
-
+#---------------------------------------------------------------------------------------------------------------------
 # License agreement function
 license_accept() {
   local BND="----------------------------------------------------------------------------------------------------------------------------"
@@ -58,8 +59,8 @@ license_accept() {
       sleep 1
       clear || for i in {1..30}; do echo ""; done
 
-      print_success "License accepted. Proceeding with Qiskit software installation..."
-
+      
+     
       mkdir -p "$STORE_DIR"
       local user_ip
       user_ip=$(hostname -I | awk '{print $1}')
@@ -86,8 +87,14 @@ license_accept() {
       exit 1
       ;;
   esac
+  
+  #  [Display the Banner after license acceptance]
+  check_status_qtool_wizard
+  print_success "License accepted. Proceeding with Qiskit software installation..."
 }
 
 #---------------------------------------------------------------------------------------------------------------------
 # Run
 license_accept
+
+
