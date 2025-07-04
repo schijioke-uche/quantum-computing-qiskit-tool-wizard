@@ -6,7 +6,7 @@
 # @Usage:    Install Qiskit software and its dependencies
 # @License:  Qiskit Tool License
 
-source ./lib/wizard.sh
+
 # Set project root early — before any functions
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -89,8 +89,9 @@ license_accept() {
   esac
   
   #  [Display the Banner after license acceptance]
+  source ./lib/wizard-check.sh
   check_status_qtool_wizard
-  print_success "License accepted. Proceeding with Qiskit software installation..."
+  print_success "License accepted. Qiskit Tool Wizard Software v2.2.1"
 }
 
 #---------------------------------------------------------------------------------------------------------------------

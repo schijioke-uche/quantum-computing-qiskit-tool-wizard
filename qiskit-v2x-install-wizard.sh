@@ -137,7 +137,7 @@ show_summary() {
 
 # [6] Main flow
 qiskit_development_environment() {
-  echo -e "\n\033[1;34m${QTOOL_WIZARD}\033[0m"
+  # echo -e "\n\033[1;34m${QTOOL_WIZARD}\033[0m"
   source ./lib/wizard-check.sh
   check_status_qtool_wizard
 
