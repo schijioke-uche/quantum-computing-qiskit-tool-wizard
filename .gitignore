@@ -4,7 +4,7 @@
 
 logs
 test.py
-license-accepted-*
+qwizard-license-accepted-*
 
 .env
 *.pyc

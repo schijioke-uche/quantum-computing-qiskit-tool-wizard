@@ -87,11 +87,11 @@ license_accept() {
       exit 1
       ;;
   esac
-  
   #  [Display the Banner after license acceptance]
+  echo -e "\n\033[1;36m${bnd}\033[0m"
   source ./lib/wizard-check.sh
   check_status_qtool_wizard
-  print_success "License accepted. Qiskit Tool Wizard Software v2.2.1"
+  print_success "License accepted. Qiskit Tool Wizard Software v2.2.9"
 }
 
 #---------------------------------------------------------------------------------------------------------------------
