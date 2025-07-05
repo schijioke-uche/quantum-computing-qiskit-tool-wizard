@@ -113,12 +113,14 @@ install_qiskit() {
 
   print_success "Qiskit packages installed."
   uv pip cache purge >/dev/null 2>&1 || print_info "uv cache purge is not necessary - This is a Lightweight Installation."
+ 
 }
 
 # [4] Install Jupyter
 install_jupyter() {
   print_step "Installing Jupyter..."
   uv pip install --quiet jupyter >/dev/null 2>&1
+  python -m ipykernel install --user --name=qiskit-v2x-env --display-name="Python 3.12 (qiskit-v2x-env)"
   print_success "Jupyter installed."
 }
 
