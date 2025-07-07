@@ -22,6 +22,75 @@ print_special_success() { echo -e "\033[1;32m$1\033[0m"; }
 print_special_info()     { echo -e "\033[1;34m  $1\033[0m"; }
 
 #---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+#========================================================
+log() { echo "[$(date +%H:%M:%S)] $*"; }
+
+has_cmd() { command -v "$1" &>/dev/null; }
+
+install_uv() {
+  if ! has_cmd uv; then
+    log "Installing uv (Rust-based Python package manager)..."
+    curl -sSf https://astral.sh/uv/install.sh | sh
+    export PATH="$HOME/.cargo/bin:$PATH"
+  else
+    log "uv is already installed."
+  fi
+}
+
+install_macos() {
+  log "Detected macOS"
+  has_cmd python3 || brew install python
+}
+
+install_linux() {
+  log "Detected Linux"
+  if has_cmd apt; then
+    sudo apt-get -qq update
+    sudo apt-get install -y python3 python3-venv python3-pip
+  elif has_cmd dnf; then
+    sudo dnf install -y python3 python3-venv python3-pip
+  elif has_cmd yum; then
+    sudo yum install -y python3 python3-venv python3-pip
+  elif has_cmd zypper; then
+    sudo zypper install -y python3 python3-venv python3-pip
+  elif has_cmd apk; then
+    sudo apk add python3 py3-pip py3-virtualenv
+  else
+    log "❌ Unsupported Linux distribution."
+    exit 1
+  fi
+}
+
+check_python_tools() {
+  log "Checking Python version and tools..."
+  python3 --version || { log "Python not found"; exit 1; }
+
+  python3 -m ensurepip --default-pip >/dev/null 2>&1 || true
+  python3 -m venv --help >/dev/null 2>&1 || { log "venv not available."; exit 1; }
+
+  log "✅ Python, pip, and venv available"
+}
+
+main() {
+  OS=$(uname -s)
+  case "$OS" in
+    Linux) install_linux ;;
+    Darwin) install_macos ;;
+    *) log "❌ Unsupported OS: $OS"; exit 1 ;;
+  esac
+
+  check_python_tools
+  install_uv
+
+  log "✅ Python environment is ready. uv is available."
+}
+
+#---------------------------------------------------------------------------------------------
+
 # License agreement function
 license_accept() {
   local BND="----------------------------------------------------------------------------------------------------------------------------"
@@ -93,6 +162,9 @@ license_accept() {
   check_status_qtool_wizard
    echo -e "\n\033[1;36m${bnd}\033[0m"
   print_success "License accepted. Qiskit Tool Wizard Software v2.2.9"
+  print_notice "Checking System Requirements, please wait..."
+  sleep 6
+  main
 }
 
 #---------------------------------------------------------------------------------------------------------------------
