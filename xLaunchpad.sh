@@ -15,6 +15,18 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-source "$SCRIPT_DIR/qiskit-v2x-install-wizard.sh"
+#Ask user if Install or Uninstall
+read -p "Do you want to Install or Uninstall Qiskit v2.x? (Install [1] | Uninstall [2]): " user_choice
+user_choice=$(echo "$user_choice" | tr '[:upper:]' '[:lower:]')
+
+if [[ "$user_choice" == "install" || "$user_choice" == "1" ]]; then
+    source "$SCRIPT_DIR/qiskit-v2x-install-wizard.sh"
+elif [[ "$user_choice" == "uninstall" || "$user_choice" == "2" ]]; then
+    source "$SCRIPT_DIR/qiskit-v2x-uninstall-wizard.sh"
+else
+    echo "Invalid choice. Please enter 'Install' or 'Uninstall'."
+    exit 1
+fi
+
 
 
