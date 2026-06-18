@@ -15,5 +15,5 @@
 #---------------------------------------------------------------------------------------------
 git add -A
 git commit -m "Update Qiskit installer Wizard Application"
-git push
+git push origin main
 chmod 777 *.sh
