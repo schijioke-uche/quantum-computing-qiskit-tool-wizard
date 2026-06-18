@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 #---------------------------------------------------------------------------------------------
+# @Author: Dr. Jeffrey Chijioke-Uche
 # @Project: Quantum Computing Qiskit v2.x Tool Wizard
 # @Technology: Quantum Computing, Qiskit
 # @File: qiskit-v2x-install-wizard.sh
