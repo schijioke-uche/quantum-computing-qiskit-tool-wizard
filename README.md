@@ -48,19 +48,12 @@ git clone https://github.com/schijioke-uche/quantum-computing-qiskit-tool-wizard
 
 ##### Step-2: Change directory
 ```sh
-cd quantum-qiskit-v2x-startertool-wizard
+cd quantum-computing-qiskit-tool-wizard
 ```
 
 ##### Step-3: Run the install wizard
 ```sh
-./qiskit-v2x-install-wizard.sh
-```
-
-----------------------------------------------
-
-######  Removal of Qiskit Installation & Virtual Environment
-```sh
-rm -rf  ~/qiskit-v2x-env
+./xLaunchpad.sh
 ```
 
 ----------------------------------------------
